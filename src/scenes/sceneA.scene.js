@@ -13,7 +13,8 @@ export class SceneA extends Phaser.Scene {
       
     create() {
         const logo = this.add.image(400, 150, "logo");
-      
+        const cam  = this.cameras.add(0, 0, 900, 600);
+
         this.tweens.add({
           targets: logo,
           y: 450,
@@ -22,5 +23,7 @@ export class SceneA extends Phaser.Scene {
           yoyo: true,
           loop: -1
         });
+
+        cam.setBackgroundColor(0xbababa);
     }
 }
