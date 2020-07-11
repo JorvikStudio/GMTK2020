@@ -1,17 +1,16 @@
 import Phaser from "phaser";
-import logoImg from "./assets/logo.png";
-import { MainMenu } from "./scenes/menu.scene";
-import { SceneA } from "./scenes/sceneA.scene";
-import { MattScene } from "./scenes/matt.scene";
 import { PreloadScene } from "./scenes/_preload.scene";
-
+import { MainMenu } from "./scenes/menu.scene";
+import { Level1Scene } from "./scenes/level1.scene";
+import { Level2Scene } from "./scenes/level2.scene";
+import { Level3Scene } from "./scenes/level3.scene";
 
 export const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
   width: 800,
   height: 600,
-  scene: [PreloadScene, MattScene, MainMenu, SceneA],
+  scene: [PreloadScene, MainMenu, Level1Scene, Level2Scene, Level3Scene],
   render: {
     pixelArt: true
   },

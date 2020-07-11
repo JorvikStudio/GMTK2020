@@ -11,7 +11,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, "player");
     scene.physics.world.enable(this);
     scene.add.existing(this);
-    //this.play(ANIMS.PLAYER.IDLE);
 
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
     this.keyboard = this.scene.input.keyboard.addKeys(Phaser.Input.Keyboard.KeyCodes);

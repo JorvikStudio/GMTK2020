@@ -1,7 +1,8 @@
 import { SCENE_NAMES } from "../_cst";
+
 import walls from "../assets/castle/walls_far.png"
 import lights3 from "../assets/castle/anim_light3.png";
-
+import logo from "../assets/logo.png";
 import { Light } from "../sprites/light/light"
 import { ANIMS } from "../sprites/light/_cst";
 
@@ -17,6 +18,7 @@ export class MainMenu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image("logo", logo);
         this.load.image("wall", walls);
         this.load.spritesheet("light_animation", lights3, {
             frameWidth: 64,
@@ -39,18 +41,57 @@ export class MainMenu extends Phaser.Scene {
         const gameHeight = this.game.canvas.height;
         this.renderBackground(gameWidth, gameHeight);
 
-        const playButton = this.add.text(175, 200, "Play!", {
+        const logo = this.add.image(400, 150, "logo");
+
+        this.tweens.add({
+          targets: logo,
+          y: 450,
+          duration: 2000,
+          ease: "Power2",
+          yoyo: true,
+          loop: -1
+        });
+
+        const gameName = this.add.text(175, 100, "SUPER WIZARD", {
+            fill: "#fff6a8",
+            fontFamily: "Consolas",
+            fontSize: 64
+        });
+
+        const playButton = this.add.text(175, 200, "Level 1", {
             fill: "#fff6a8",
             fontFamily: "Consolas",
             fontSize: 32
         });
 
-        playButton.setInteractive();
+       playButton.setInteractive();
         playButton.on("pointerdown", () => {
-            this.scene.start(SCENE_NAMES.MATT_SCENE);
+            this.scene.start(SCENE_NAMES.LEVEL1);
         })
 
-        const creditsButton = this.add.text(175, 300, "Credits", {
+        const level2Button = this.add.text(175, 275, "Level 2", {
+            fill: "#fff6a8",
+            fontFamily: "Consolas",
+            fontSize: 32
+        });
+
+       level2Button.setInteractive();
+        level2Button.on("pointerdown", () => {
+            this.scene.start(SCENE_NAMES.LEVEL2);
+        })
+
+        const level3Button = this.add.text(175, 350, "Level 3", {
+            fill: "#fff6a8",
+            fontFamily: "Consolas",
+            fontSize: 32
+        });
+
+       level3Button.setInteractive();
+        level3Button.on("pointerdown", () => {
+            this.scene.start(SCENE_NAMES.LEVEL3);
+        })
+
+        const creditsButton = this.add.text(175, 425, "Credits", {
             fill: "#fff6a8",
             fontFamily: "Consolas",
             fontSize: 32
@@ -73,10 +114,19 @@ export class MainMenu extends Phaser.Scene {
         });
 
         this.light.on("light_select", () => {
-            const playSelector = Object.keys(this.light_positions)[0];
-            const creditsSelector = Object.keys(this.light_positions)[1];
-            if (this.selectorPosition === playSelector) {
-                this.scene.start(SCENE_NAMES.MATT_SCENE);
+            const play1Selector = Object.keys(this.light_positions)[0];
+            const play2Selector = Object.keys(this.light_positions)[1];
+            const play3Selector = Object.keys(this.light_positions)[2];
+            const creditsSelector = Object.keys(this.light_positions)[3];
+
+            if (this.selectorPosition === play1Selector) {
+                this.scene.start(SCENE_NAMES.LEVEL1);
+            }
+            else if (this.selectorPosition === play2Selector) {
+                this.scene.start(SCENE_NAMES.LEVEL2);
+            }
+            else  if (this.selectorPosition === play3Selector) {
+                this.scene.start(SCENE_NAMES.LEVEL3);
             }
         });
         

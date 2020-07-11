@@ -22,6 +22,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.multiatlas("enemy3_atlas", enemy3Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy4_atlas", enemy4Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy5_atlas", enemy5Atlas, "src/assets/spritesheets");
+    this.load.audio("music", [require("../assets/unwritten-return.mp3")]);
   }
 
   create() {
@@ -33,7 +34,21 @@ export class PreloadScene extends Phaser.Scene {
     this.createEnemy4Animations();
     this.createEnemy5Animations();
 
-    this.scene.start(SCENE_NAMES.MATT_SCENE);
+    this.music = this.sound.add("music");
+    var musicConfig = {
+      mute: false,
+      volume: 1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 0
+    };
+
+    this.music.play(musicConfig);  
+
+    this.scene.start(SCENE_NAMES.MAIN_MENU);
+    //this.scene.start(SCENE_NAMES.LEVEL1);
   }
 
   createPlayerAnimations() {
