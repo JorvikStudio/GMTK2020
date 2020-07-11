@@ -10,11 +10,11 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         
         this.pi = 0;
 
-        this.createShellFlightPath();
-        this.createShellEntryPath(this.shell.getPoint(0.85));
+        this.isEntryComplete = false;
 
-        // this.curve = this.entryPath;
-        // this.curve.add(this.shell)
+        this.createShellFlightPath();
+        this.createShellEntryPath(this.shell.getStartPoint());
+
         this.curve = this.shell;
     }
   
@@ -23,12 +23,12 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         var height = 100;
         var width = 50;
 
-        var height = 150;
-        var width = 100;
+        // var height = 150;
+        // var width = 100;
 
         this.shell = new Phaser.Curves.Ellipse(this.x, this.y, width, height);
         
-        this.drawCurve(this.shell);
+        // this.drawCurve(this.shell);
     }
     
     createShellEntryPath(endPoint)
@@ -38,7 +38,7 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
 
         this.entryPath = new Phaser.Curves.QuadraticBezier(startPoint, controlPoint, endPoint);
 
-        this.drawCurve(this.entryPath);
+        // this.drawCurve(this.entryPath);
     }
 
     // this will draw the flight path, more for debugging than anything else
@@ -63,15 +63,32 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     {
         this.ball.clear();
         
-        for (var i = 0; i<3; i++)
+        if (!this.isEntryComplete)
         {
-            this.percent = (this.pi+i)/70;
-            var x = this.curve.getPoint(this.percent).x;
-            var y = this.curve.getPoint(this.percent).y;
-            this.drawfireball(x, y, (i+1)*3);
-        }  
+            this.drawFireballs(this.entryPath, 15);
+            if(this.pi == 15)
+            {
+                this.isEntryComplete = true;
+                this.pi = 0;
+            }
+        }
+        else
+        {
+            this.drawFireballs(this.shell, 80);
+        }
         
         this.pi++;
+    }
+
+    drawFireballs (curve, numberOfPoints)
+    {
+        for (var i = 0; i<3; i++)
+        {
+            this.percent = (this.pi+i)/numberOfPoints;
+            var x = curve.getPoint(this.percent).x;
+            var y = curve.getPoint(this.percent).y;
+            this.drawfireball(x, y, (i+1)*3);
+        }
     }
 
     drawfireball (x, y, size)
