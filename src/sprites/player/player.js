@@ -1,5 +1,5 @@
 import {config, game} from "../../index";
-import { ANIMS, PLAYER_STATE } from "./_cst";
+import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
 import { Firecircle } from "../firecircle/firecircle"
 
@@ -16,23 +16,31 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
     this.keyboard = this.scene.input.keyboard.addKeys(Phaser.Input.Keyboard.KeyCodes);
 
-    //this.resetSize(false);
-
     this.playerJumpHeight = 650;
-    this.isJumping = false; 
+    this.isJumping = false;
+    this.isCasting = false;
+    this.invincible = false;
+    this.setBounce(0, 0);
+    this.setImmovable(false);
     this.state = PLAYER_STATE.IDLE;
-    this.body.setSize(24, 38, true);
+    this.body.setSize(24, 38);
     this.scale = 1.5
     console.log(this);
     //this.body.updateCenter();
     
-    //this.body.offset = ({x: 10, y: 30});
+    this.body.offset = ({x: -1, y: 0});
+
+    this.on("animationcomplete", this.animComplete, this);
+    this.blockedInput = false
   }
 
   update() {
     this.body.updateCenter();
-    let isCrouched = false;
     let playerSpeed = 250;
+    if(this.body.onFloor()) {
+      this.setVelocityX(0);
+      this.blockedInput = false;
+    }
 
     this.debugShowBody = this.keyboard.SHIFT.isDown;
     this.jumpingFrame = false;
@@ -41,87 +49,72 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // Debug here
     }
 
-    // need powers mapper here
-    if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
-      const direction =  this.flipX ? -1 : 1 // probably need something here to determine directional shots
-      this.spell = new Firecircle(this.scene, this.x, this.y, direction);
-      this.spell.update();
-    }
+    if(!this.blockedInput) {
 
-    if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
-      const direction = this.flipX ? -1 : 1
-      this.spell = new Fireball(this.scene, this.x, this.y, direction);
-      this.spell.update();
-    }
-
-    if (this.spell)
-    {
-      this.spell.update();
-    }
-
-    if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
-      if(!this.isJumping) {
-        this.isJumping = true;
-        this.jump();
-        this.state = PLAYER_STATE.JUMPING;
-        this.jumpingFrame = true;
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
+        const direction = this.flipX ? -1 : 1
+        const fb = new Fireball(this.scene, this.x, this.y, direction);
+        fb.update();
       }
-    }
-    
-    if(!this.jumpingFrame && this.isJumping && this.body.onFloor()) {
-      this.isJumping = false;
-    }
-
-    let isMoving = false;
-    if (this.cursorKeys.right.isDown) {
-      isMoving = true;
-      this.body.setVelocityX(playerSpeed);
-      this.setFlipX(false);
-    } else if (this.cursorKeys.left.isDown) {
-      isMoving = true;
-      this.body.setVelocityX(-playerSpeed);
-      this.setFlipX(true);
-    } else {
-      this.body.setVelocityX(0);
-    }
-    
-
-    if(this.isJumping) {
-      this.state = PLAYER_STATE.JUMPING;
-    } else if(isMoving) {
-      this.state = PLAYER_STATE.WALKING;
-    } else {
-      this.state = PLAYER_STATE.IDLE;
-    }
-
-    if(this.cursorKeys.down.isDown) {
-      //this.crouch(this.flipX);
-      isCrouched = true;
-    } else {
-      //this.resetSize();
-    }
-    
-    switch(this.state) {
-      case PLAYER_STATE.JUMPING:
-        this.anims.play(ANIMS.PLAYER.JUMP);
-        break;
-      case PLAYER_STATE.IDLE:
-        if(isCrouched) {
-          //this.anims.play(ANIMS.DINO.CROUCH);
-        } else {
-          this.anims.play(ANIMS.PLAYER.IDLE, true);
+  
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
+        if(!this.isJumping) {
+          this.isJumping = true;
+          this.jump();
+          this.state = PLAYER_STATE.JUMPING;
+          this.jumpingFrame = true;
         }
-        break;
-      case PLAYER_STATE.WALKING:
-        if(isCrouched) {
-          //this.anims.play(ANIMS.DINO.CROUCH_WALK, true)
-        } else {
-          this.anims.play(ANIMS.PLAYER.WALK, true);
-        }
-        break;
-      default:
-        console.log("STATE NOT ANIMATED")
+      }
+      
+      if(!this.jumpingFrame && this.isJumping && this.body.onFloor()) {
+        this.isJumping = false;
+      }
+  
+      let isMoving = false;
+      if (this.cursorKeys.right.isDown) {
+        isMoving = true;
+        this.body.setVelocityX(playerSpeed);
+        this.setFlipX(false);
+      } else if (this.cursorKeys.left.isDown) {
+        isMoving = true;
+        this.body.setVelocityX(-playerSpeed);
+        this.setFlipX(true);
+      } else {
+        this.body.setVelocityX(0);
+      }
+      
+  
+      if(this.isJumping) {
+        this.state = PLAYER_STATE.JUMPING;
+      } else if(isMoving) {
+        this.state = PLAYER_STATE.WALKING;
+      } else if (this.isCasting) {
+        this.state = PLAYER_STATE.CASTING;
+      } else {
+        this.state = PLAYER_STATE.IDLE;
+      }
+  
+      switch(this.state) {
+        case PLAYER_STATE.JUMPING:
+          this.anims.play(ANIMS.PLAYER.JUMP);
+          break;
+        case PLAYER_STATE.IDLE:
+            this.anims.play(ANIMS.PLAYER.IDLE, true);
+          break;
+        case PLAYER_STATE.WALKING:
+            this.anims.play(ANIMS.PLAYER.WALK, true);
+          break;
+        case PLAYER_STATE.CASTING:
+          this.anims.play(ANIMS.PLAYER.CAST, true)
+        default:
+          console.log("STATE NOT ANIMATED")
+      }
+
+    } else {
+      console.log("blocked");
     }
+
+
     // Normalize and scale the velocity so that player can't move faster along a diagonal
     //this.body.velocity.normalize().scale(playerSpeed);
 
@@ -132,16 +125,32 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-this.playerJumpHeight);
   }
 
+  damage() {
+    if(!this.invincible) {
+      console.log("damage");
+      this.anims.play(ANIMS.PLAYER.DAMAGED);
+      this.blockedInput = true;
+      this.setVelocityX(300 * this.getFacingDirection() * -1);
+      this.setVelocityY(-200);
+      this.invincible = true;
 
-  /* 110% not the way to do this with offsets, need to look into this more */
-  resetSize(flipped) {
-    const multiplier = flipped ? -1 : 1;
-    this.body.setOffset(4 * multiplier, 0);
-    this.body.setSize(16, 18, false);
+      const timeout = setTimeout(() => { 
+        console.log("timer");
+        this.invincible = false;
+      }, 3000);
+    }
   }
 
-  crouch() {
-    this.body.setOffset(0, 4);
-    this.body.setSize(20, 14, false);
+  animComplete(animation, frame) {
+    const key = animation.key;
+    const direction = this.flipX;
+    if(key === ANIMS.PLAYER.DAMAGED) {
+      this.blockedInput = false;
+    }
   }
+
+  getFacingDirection() {
+    return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
+  }
+
 }
