@@ -23,7 +23,7 @@ export class Enemy1 extends Phaser.Physics.Arcade.Sprite {
             this.play(ANIMS.ENEMY1.IDLE);
         }, 9000);
 
-        this.body.setSize(24, 38)
+        this.body.setSize(32, 32)
         this.scale = 1.5
         
     }

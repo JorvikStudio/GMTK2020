@@ -3,8 +3,8 @@ import { ANIMS } from "./_cst"
 
 export class Enemy3 extends Phaser.Physics.Arcade.Sprite {
     constructor(scene) {
-        var x = (config.width / 2) - 100;
-        var y = 50;
+        var x = 100;
+        var y = 400;
 
         super(scene, x, y, "enemy3");
         scene.physics.world.enable(this);
@@ -27,7 +27,7 @@ export class Enemy3 extends Phaser.Physics.Arcade.Sprite {
             this.play(ANIMS.ENEMY3.IDLE);
         }, 12000);
 
-        this.body.setSize(34, 38)
+        this.body.setSize(64, 64);
         this.scale = 1.5
 
     }
