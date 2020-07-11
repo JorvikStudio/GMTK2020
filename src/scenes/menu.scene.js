@@ -1,36 +1,87 @@
 import { SCENE_NAMES } from "../_cst";
 import walls from "../assets/castle/walls.png"
 import background from "../assets/castle/background.png"
+import lights3 from "../assets/castle/anim_light3.png";
+
+import { Light } from "../sprites/light/light"
+import { ANIMS } from "../sprites/light/_cst";
 
 export class MainMenu extends Phaser.Scene {
 
     constructor() {
-        super(SCENE_NAMES.MAIN_MENU)
+        super(SCENE_NAMES.MAIN_MENU);
+        this.light_positions = {
+            play: 200,
+            credits: 300
+        };
+        this.selectorPosition = Object.keys(this.light_positions)[0];
     }
 
     preload() {
         this.load.image("wall", walls);
         this.load.image("menu_background", background);
+        this.load.spritesheet("light_animation", lights3, {
+            frameWidth: 64,
+            frameHeight: 64
+        });
     }
 
     create() {
+        this.anims.create({
+            key: ANIMS.LIGHT.DEFAULT,
+            frames: this.anims.generateFrameNumbers("light_animation", {
+                start: 0,
+                end: 4
+            }),
+            frameRate: 8,
+            repeat: -1
+        });
+
         const gameWidth = this.game.canvas.width;
         const gameHeight = this.game.canvas.height;
         this.renderBackground(gameWidth, gameHeight);
 
-        const playButton = this.add.text(100, 100, "Play!", {
-            fill: "#0f0"
+        const playButton = this.add.text(175, 200, "Play!", {
+            fill: "#fff6a8",
+            fontFamily: "Consolas",
+            fontSize: 32
         });
+
         playButton.setInteractive();
         playButton.on("pointerdown", () => {
             this.scene.start(SCENE_NAMES.MATT_SCENE);
         })
 
-        const helloButton = this.add.text(100, 200, 'Go to Game!', { fill: '#0f0' });
-        helloButton.setInteractive();
-        helloButton.on("pointerdown", () => {
+        const creditsButton = this.add.text(175, 300, "Credits", {
+            fill: "#fff6a8",
+            fontFamily: "Consolas",
+            fontSize: 32
+        });
+        creditsButton.setInteractive();
+        creditsButton.on("pointerdown", () => {
             this.scene.start(SCENE_NAMES.SCENE_A);
         })
+
+        this.light = new Light(this);
+        this.light.setPosition(100, this.light_positions[this.selectorPosition]);
+
+        this.light.on("light_up", () => {
+            this.selectorPosition = Object.keys(this.light_positions)[0];
+            this.light.setY(this.light_positions[this.selectorPosition]);
+        });
+        this.light.on("light_down", () => {
+            this.selectorPosition = Object.keys(this.light_positions)[1];
+            this.light.setY(this.light_positions[this.selectorPosition]);
+        });
+
+        this.light.on("light_select", () => {
+            const playSelector = Object.keys(this.light_positions)[0];
+            const creditsSelector = Object.keys(this.light_positions)[1];
+            if (this.selectorPosition === playSelector) {
+                this.scene.start(SCENE_NAMES.MATT_SCENE);
+            }
+        });
+        
     }
 
     renderBackground(gameWidth, gameHeight) {
@@ -59,6 +110,10 @@ export class MainMenu extends Phaser.Scene {
             image.setScale(tileScale);
             image.setCrop(imageCropX, 0, imageWidth, imageHeight)
         }
+    }
+
+    update() {
+        this.light.update();
     }
 
 

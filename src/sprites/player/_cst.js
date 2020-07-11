@@ -4,7 +4,7 @@ export const ANIMS = {
     WALK: "dino_walk",
     CROUCH: "dino_crouch",
     CROUCH_WALK: "dino_crouch_walk",
-    JUMP: "dino_jump"
+    JUMP: "dino_jump",
   }
 }
 
