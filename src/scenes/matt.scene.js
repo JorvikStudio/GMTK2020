@@ -47,7 +47,7 @@ export class MattScene extends Phaser.Scene {
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
       this.player = new Player(this);
-      this.enemy = new Enemy1(this);
+      this.enemy1 = new Enemy1(this);
       this.enemy2 = new Enemy2(this);
       this.enemy3 = new Enemy3(this);
       this.enemy4 = new Enemy4(this);
@@ -59,8 +59,11 @@ export class MattScene extends Phaser.Scene {
       this.cameras.main.startFollow(this.player);
 
       this.physics.add.collider(this.player, this.mainLayer);
-      this.physics.add.collider(this.enemy, this.mainLayer);
+      this.physics.add.collider(this.enemy1, this.mainLayer);
       this.physics.add.collider(this.enemy2, this.mainLayer);
+      this.physics.add.collider(this.enemy3, this.mainLayer);
+      this.physics.add.collider(this.enemy4, this.mainLayer);
+      this.physics.add.collider(this.enemy5, this.mainLayer);
 
       this.music = this.sound.add("music");
       var musicConfig = {
@@ -72,11 +75,7 @@ export class MattScene extends Phaser.Scene {
         loop: false,
         delay: 0
       };
-      this.music.play(musicConfig);
-      //this.physics.add.collider(this.enemy3, this.mainLayer);
-      this.physics.add.collider(this.enemy3, this.mainLayer);
-      this.physics.add.collider(this.enemy4, this.mainLayer);
-      this.physics.add.collider(this.enemy5, this.mainLayer);
+      this.music.play(musicConfig);    
       
     }
 
