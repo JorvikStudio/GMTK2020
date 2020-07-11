@@ -3,8 +3,8 @@ import { Player } from "../sprites/player/player";
 import { Enemy1 } from "../sprites/enemy/enemy1";
 import player_dino from "../assets/spritesheets/dino.png"
 
-import tiles from "../assets/tilesets/matt/tiles.png";
-import dino_level from "../assets/tilesets/matt/dino_level.json";
+import tiles from "../assets/tilesets/gino/Assets.png";
+import gino_level from "../assets/tilesets/gino/gino_level.json";
 import { ANIMS } from "../sprites/player/_cst";
 import { Enemy2 } from "../sprites/enemy/enemy2";
 
@@ -19,7 +19,7 @@ export class MattScene extends Phaser.Scene {
       console.log("preload");
 
       this.load.image("tiles", tiles);
-      this.load.tilemapTiledJSON("map", dino_level);
+      this.load.tilemapTiledJSON("map", gino_level);
     }
       
     create() {
@@ -27,12 +27,16 @@ export class MattScene extends Phaser.Scene {
       const map = this.make.tilemap({key: "map"});
       console.log(map);
 
-      const tileset = map.addTilesetImage("Dungeon", "tiles");
+      const tileset = map.addTilesetImage("Assets", "tiles");
       this.mainLayer = map.createStaticLayer("mainLayer", tileset, 0, 0);
       this.mainLayer.setCollisionByProperty({collides: true});
 
       this.mainLayer.scale = 2;
       
+      // this.layer2 = map.createStaticLayer("layer2", tileset, 0, 0);
+
+
+      // this.layer2.scale = 2;
 
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
