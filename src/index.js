@@ -4,12 +4,13 @@ import { MainMenu } from "./scenes/menu.scene";
 import { SceneA } from "./scenes/sceneA.scene";
 import { MattScene } from "./scenes/matt.scene";
 
+
 export const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
   width: 800,
   height: 600,
-  scene: [MattScene, MainMenu, SceneA],
+  scene: [MainMenu, MattScene, SceneA],
   render: {
     pixelArt: true
   },
