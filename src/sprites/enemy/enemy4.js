@@ -2,30 +2,26 @@ import { config } from "../../index";
 import { ANIMS } from "./_cst"
 import { EnemyBase } from "./enemy.base";
 
-export class Enemy1 extends EnemyBase {
+export class Enemy4 extends EnemyBase {
     constructor(scene) {
-        const x = (config.width / 2) + 100;
+        const x = (config.width / 2) - 60;
         const y = 50;
-        super(scene, x, y, "enemy1", 32, 32);
+        super(scene, x, y, "enemy4", 64, 64);
     }
 
-    startBaseAnimation()
-    {
-        this.play(ANIMS.ENEMY1.IDLE);
+    startBaseAnimation() {
+        this.play(ANIMS.ENEMY4.IDLE);
     }
 
-    scheduleAnimations()
-    {
+    scheduleAnimations() {
         setTimeout(() => {
-            this.play(ANIMS.ENEMY1.HIT);
+            this.play(ANIMS.ENEMY4.HIT);
         }, 3000);
-
         setTimeout(() => {
-            this.play(ANIMS.ENEMY1.ATTACK);
+            this.play(ANIMS.ENEMY4.ATTACK);
         }, 6000);
-
         setTimeout(() => {
-            this.play(ANIMS.ENEMY1.IDLE);
+            this.play(ANIMS.ENEMY4.IDLE);
         }, 9000);
     }
 
