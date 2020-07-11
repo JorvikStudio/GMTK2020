@@ -1,10 +1,12 @@
 import { SCENE_NAMES } from "../_cst";
 import { Player } from "../sprites/player/player";
+import { Enemy1 } from "../sprites/enemy/enemy1";
 import player_dino from "../assets/spritesheets/dino.png"
 
 import tiles from "../assets/tilesets/matt/tiles.png";
 import dino_level from "../assets/tilesets/matt/dino_level.json";
 import { ANIMS } from "../sprites/player/_cst";
+import { Enemy2 } from "../sprites/enemy/enemy2";
 
 export class MattScene extends Phaser.Scene {
 
@@ -92,8 +94,12 @@ export class MattScene extends Phaser.Scene {
       });
       
       this.player = new Player(this);
+      this.enemy = new Enemy1(this);
+      this.enemy2 = new Enemy2(this);
 
       this.physics.add.collider(this.player, this.mainLayer);
+      this.physics.add.collider(this.enemy, this.mainLayer);
+      this.physics.add.collider(this.enemy2, this.mainLayer);
       
     }
 
