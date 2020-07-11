@@ -9,27 +9,32 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, "player");
     scene.physics.world.enable(this);
     scene.add.existing(this);
-    this.setDisplaySize(this.body.width * 3, this.body.height * 3);
-    this.play(ANIMS.PLAYER.IDLE);
+    //this.play(ANIMS.PLAYER.IDLE);
 
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
     this.keyboard = this.scene.input.keyboard.addKeys(Phaser.Input.Keyboard.KeyCodes);
 
-    this.resetSize(false);
-    console.log(this.keyboard);
+    //this.resetSize(false);
 
     this.playerJumpHeight = 650;
     this.isJumping = false; 
     this.state = PLAYER_STATE.IDLE;
+    this.body.setSize(24, 38, true);
+    this.scale = 1.5
+    console.log(this);
+    //this.body.updateCenter();
+    
+    //this.body.offset = ({x: 10, y: 30});
   }
 
   update() {
-    
+    this.body.updateCenter();
     let isCrouched = false;
     let playerSpeed = 250;
 
     this.debugShowBody = this.keyboard.SHIFT.isDown;
     this.jumpingFrame = false;
+    this.debugShowBody = true;
     if(this.keyboard.SHIFT.isDown) {
       // Debug here
     }
@@ -76,10 +81,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if(this.cursorKeys.down.isDown) {
-      this.crouch(this.flipX);
+      //this.crouch(this.flipX);
       isCrouched = true;
     } else {
-      this.resetSize();
+      //this.resetSize();
     }
     
     switch(this.state) {

@@ -10,12 +10,12 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.multiatlas("player", playerAtlas);
+    this.load.multiatlas("player_atlas", playerAtlas, "src/assets/spritesheets");
   }
 
   create() {
 
-    const frameNames = this.anims.generateFrameNames("player", {
+    const frameNames = this.anims.generateFrameNames("player_atlas", {
       start: 1,
       end: 4,
       zeroPad: 2,
@@ -28,7 +28,7 @@ export class PreloadScene extends Phaser.Scene {
     this.anims.create({
       key: ANIMS.PLAYER.IDLE,
       frames: frameNames,
-      frameRate: 10,
+      frameRate: 8,
       repeat: -1
     });
     
