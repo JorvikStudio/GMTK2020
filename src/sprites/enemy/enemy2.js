@@ -1,16 +1,20 @@
 import { config } from "../../index";
 import { ANIMS } from "./_cst"
+import { EnemyBase } from "./enemy.base";
 
-export class Enemy2 extends Phaser.Physics.Arcade.Sprite {
+export class Enemy2 extends EnemyBase {
     constructor(scene) {
-        var x = (config.width / 2) - 150;
-        var y = 50;
+        const x = (config.width / 2) - 150;
+        const y = 50;
+        super(scene, x, y, "enemy2", 32, 32);
+    }
 
-        super(scene, x, y, "enemy2");
-        scene.physics.world.enable(this);
-        scene.add.existing(this);
+    startBaseAnimation()
+    {
         this.play(ANIMS.ENEMY2.IDLE);
+    }
 
+    scheduleAnimations() {
         setTimeout(() => {
             this.play(ANIMS.ENEMY2.HIT);
         }, 3000);
@@ -22,10 +26,6 @@ export class Enemy2 extends Phaser.Physics.Arcade.Sprite {
         setTimeout(() => {
             this.play(ANIMS.ENEMY2.IDLE);
         }, 9000);
-
-        this.body.setSize(32, 32);
-        this.scale = 1.5
-
     }
 
     update() {
