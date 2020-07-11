@@ -2,11 +2,12 @@ import {config, game} from "../../index";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
 import { Firecircle } from "../firecircle/firecircle"
+import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
-    var x = config.width / 2;
-    var y = 200;
+    var x = 100; //config.width / 2;
+    var y = 100;
 
     super(scene, x, y, "player");
     scene.physics.world.enable(this);
@@ -64,7 +65,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
           this.jumpingFrame = true;
         }
       }
-      
+
       if(!this.jumpingFrame && this.isJumping && this.body.onFloor()) {
         this.isJumping = false;
       }

@@ -68,7 +68,7 @@ export class Level1Scene extends Phaser.Scene {
       this.cameras.main.startFollow(this.player);
 
       this.physics.add.collider(this.player, this.mainLayer);
-      this.physics.add.collider(this.enemies, this.mainLayer);      
+      this.physics.add.collider(this.enemies, this.mainLayer);
     }
 
     update() {

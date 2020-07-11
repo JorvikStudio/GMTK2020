@@ -12,7 +12,10 @@ export class MainMenu extends Phaser.Scene {
         super(SCENE_NAMES.MAIN_MENU);
         this.light_positions = {
             play: 200,
-            credits: 300
+            play2: 275,
+            play3: 350,
+            credits: 425,
+
         };
         this.selectorPosition = Object.keys(this.light_positions)[0];
     }

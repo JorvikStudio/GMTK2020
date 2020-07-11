@@ -4,8 +4,8 @@ import { EnemyBase } from "./enemy.base";
 
 export class Enemy2 extends EnemyBase {
     constructor(scene) {
-        const x = (config.width / 2) - 150;
-        const y = 50;
+        const x = 600;
+        const y = 200;
         super(scene, x, y, "enemy2", 32, 32);
     }
 
