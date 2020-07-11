@@ -43,11 +43,7 @@ export class MattScene extends Phaser.Scene {
       this.mainLayer = map.createStaticLayer("mainLayer", tileset, 0, 0);
       this.mainLayer.setCollisionByProperty({collides: true});
       this.mainLayer.scale = 2;
-<<<<<<< HEAD
-      
-=======
 
->>>>>>> Character animation working somewhat.
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
       this.player = new Player(this);
@@ -79,11 +75,28 @@ export class MattScene extends Phaser.Scene {
         loop: false,
         delay: 0
       };
+<<<<<<< HEAD
       this.music.play(musicConfig);    
+=======
+      this.music.play(musicConfig);
+      this.enemies = this.add.group();
+
+      this.enemies.add(this.enemy);
+      this.enemies.add(this.enemy2);
+
+      //this.physics.add.collider(this.player, this.enemies);
+>>>>>>> player is bounced back when they are damaged
       
     }
 
     update() {
       this.player.update();
+
+      this.enemy.update();
+      this.enemy2.update();
+
+      this.physics.overlap(this.player, this.enemies, () => {
+        this.player.damage();
+      });
     }
 }

@@ -215,14 +215,6 @@
             <key type="filename">C:/Users/mstan/Downloads/Gino/Attacks/AttackD06.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Attacks/AttackD07.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Attacks/AttackD08.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death01.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death02.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death03.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death04.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death05.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit01.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit02.png</key>
-            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit03.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Ledge grab/lean-out.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Ledge grab/ledge_grab.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Ledge grab/ledge_grab01.png</key>
@@ -254,6 +246,14 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death01.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death02.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death03.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death04.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/death05.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit01.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit02.png</key>
+            <key type="filename">C:/Users/mstan/Downloads/Gino/Hit, death/hit03.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Idle/idle01.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Idle/idle02.png</key>
             <key type="filename">C:/Users/mstan/Downloads/Gino/Idle/idle03.png</key>
