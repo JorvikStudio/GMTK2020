@@ -3,6 +3,7 @@ import playerAtlas from "../assets/spritesheets/gino.json";
 import enemy1Atlas from "../assets/spritesheets/enemy1.json";
 import enemy2Atlas from "../assets/spritesheets/enemy2.json";
 import enemy4Atlas from "../assets/spritesheets/enemy4.json";
+import enemy5Atlas from "../assets/spritesheets/enemy5.json";
 import { ANIMS } from "../sprites/player/_cst";
 import { ANIMS as ENEMY_ANIMS } from "../sprites/enemy/_cst"
 
@@ -18,6 +19,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.multiatlas("enemy1_atlas", enemy1Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy2_atlas", enemy2Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy4_atlas", enemy4Atlas, "src/assets/spritesheets");
+    this.load.multiatlas("enemy5_atlas", enemy5Atlas, "src/assets/spritesheets");
   }
 
   create() {
@@ -64,6 +66,7 @@ export class PreloadScene extends Phaser.Scene {
     this.createEnemy1Animations();
     this.createEnemy2Animations();
     this.createEnemy4Animations();
+    this.createEnemy5Animations();
     
     this.scene.start(SCENE_NAMES.MATT_SCENE);
   }
@@ -183,6 +186,47 @@ export class PreloadScene extends Phaser.Scene {
 
     this.anims.create({
       key: ENEMY_ANIMS.ENEMY4.ATTACK,
+      frames: this.anims.generateFrameNames("enemy4_atlas", {
+        start: 1,
+        end: 7,
+        zeroPad: 2,
+        prefix: "attack",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+  }
+
+  createEnemy5Animations() {
+    this.anims.create({
+      key: ENEMY_ANIMS.ENEMY5.IDLE,
+      frames: this.anims.generateFrameNames("enemy4_atlas", {
+        start: 1,
+        end: 7,
+        zeroPad: 2,
+        prefix: "idle",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ENEMY_ANIMS.ENEMY5.HIT,
+      frames: this.anims.generateFrameNames("enemy4_atlas", {
+        start: 1,
+        end: 3,
+        zeroPad: 2,
+        prefix: "hit",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ENEMY_ANIMS.ENEMY5.ATTACK,
       frames: this.anims.generateFrameNames("enemy4_atlas", {
         start: 1,
         end: 7,
