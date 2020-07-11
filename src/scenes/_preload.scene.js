@@ -2,6 +2,7 @@ import { SCENE_NAMES } from "../_cst";
 import playerAtlas from "../assets/spritesheets/gino.json";
 import enemy1Atlas from "../assets/spritesheets/enemy1.json";
 import { ANIMS } from "../sprites/player/_cst";
+import { ANIMS as ENEMY_ANIMS } from "../sprites/enemy/_cst"
 
 export class PreloadScene extends Phaser.Scene {
   // Preload images and animations here
@@ -57,7 +58,7 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: ANIMS.ENEMY1.IDLE,
+      key: ENEMY_ANIMS.ENEMY1.IDLE,
       frames: this.anims.generateFrameNames("enemy1_atlas", {
         start: 1,
         end: 7,
@@ -70,7 +71,7 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: ANIMS.ENEMY1.HIT,
+      key: ENEMY_ANIMS.ENEMY1.HIT,
       frames: this.anims.generateFrameNames("enemy1_atlas", {
         start: 1,
         end: 3,
@@ -83,7 +84,7 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: ANIMS.ENEMY1.ATTACK,
+      key: ENEMY_ANIMS.ENEMY1.ATTACK,
       frames: this.anims.generateFrameNames("enemy1_atlas", {
         start: 1,
         end: 10,

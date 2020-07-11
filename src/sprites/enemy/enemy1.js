@@ -1,5 +1,5 @@
 import { config } from "../../index";
-import { ANIMS } from "../player/_cst"
+import { ANIMS } from "./_cst"
 
 export class Enemy1 extends Phaser.Physics.Arcade.Sprite {
     constructor(scene) {

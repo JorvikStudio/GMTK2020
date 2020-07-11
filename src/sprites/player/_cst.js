@@ -12,11 +12,6 @@ export const ANIMS = {
     JUMP: "player_jump",
     JUMP_LAUNCH: "player_jump_launch",
     JUMP_LAND: "player_jump_land"
-  },
-  ENEMY1: {
-    IDLE: "enemy1_idle",
-    HIT: "enemy1_hit",
-    ATTACK: "enemy1_attack"
   }
 }
 
