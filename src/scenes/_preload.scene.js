@@ -201,9 +201,9 @@ export class PreloadScene extends Phaser.Scene {
   createEnemy5Animations() {
     this.anims.create({
       key: ENEMY_ANIMS.ENEMY5.IDLE,
-      frames: this.anims.generateFrameNames("enemy4_atlas", {
+      frames: this.anims.generateFrameNames("enemy5_atlas", {
         start: 1,
-        end: 7,
+        end: 9,
         zeroPad: 2,
         prefix: "idle",
         suffix: ".png"
@@ -214,7 +214,7 @@ export class PreloadScene extends Phaser.Scene {
 
     this.anims.create({
       key: ENEMY_ANIMS.ENEMY5.HIT,
-      frames: this.anims.generateFrameNames("enemy4_atlas", {
+      frames: this.anims.generateFrameNames("enemy5_atlas", {
         start: 1,
         end: 3,
         zeroPad: 2,
@@ -227,9 +227,9 @@ export class PreloadScene extends Phaser.Scene {
 
     this.anims.create({
       key: ENEMY_ANIMS.ENEMY5.ATTACK,
-      frames: this.anims.generateFrameNames("enemy4_atlas", {
+      frames: this.anims.generateFrameNames("enemy5_atlas", {
         start: 1,
-        end: 7,
+        end: 6,
         zeroPad: 2,
         prefix: "attack",
         suffix: ".png"
