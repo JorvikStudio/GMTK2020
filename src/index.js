@@ -10,7 +10,8 @@ export const config = {
   parent: "phaser-example",
   width: 800,
   height: 600,
-  scene: [MainMenu, MattScene, SceneA],
+  // scene: [MainMenu, MattScene, SceneA],
+  scene: [MattScene, SceneA],
   render: {
     pixelArt: true
   },

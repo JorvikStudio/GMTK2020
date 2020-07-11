@@ -1,4 +1,5 @@
-import { config, game } from "../../index";
+import Phaser from "phaser";
+import { config } from "../../index";
 import { ANIMS } from "./_cst";
 
 export class Light extends Phaser.Physics.Arcade.Sprite {
@@ -14,13 +15,13 @@ export class Light extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if (this.cursorKeys.down.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.down)) {
             this.emit("light_down");
         }
-        if (this.cursorKeys.up.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.up)) {
             this.emit("light_up");
         }
-        if (this.cursorKeys.space.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.cursorKeys.space)) {
             this.emit("light_select");
         }
     }
