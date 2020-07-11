@@ -6,11 +6,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     var x = config.width / 2;
     var y = 200;
 
-    super(scene, x, y, "player_dino");
+    super(scene, x, y, "player");
     scene.physics.world.enable(this);
     scene.add.existing(this);
     this.setDisplaySize(this.body.width * 3, this.body.height * 3);
-    this.play(ANIMS.DINO.IDLE);
+    this.play(ANIMS.PLAYER.IDLE);
 
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
     this.keyboard = this.scene.input.keyboard.addKeys(Phaser.Input.Keyboard.KeyCodes);
@@ -84,20 +84,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     
     switch(this.state) {
       case PLAYER_STATE.JUMPING:
-        this.anims.play(ANIMS.DINO.JUMP);
+        //this.anims.play(ANIMS.DINO.JUMP);
         break;
       case PLAYER_STATE.IDLE:
         if(isCrouched) {
-          this.anims.play(ANIMS.DINO.CROUCH);
+          //this.anims.play(ANIMS.DINO.CROUCH);
         } else {
-          this.anims.play(ANIMS.DINO.IDLE, true);
+          this.anims.play(ANIMS.PLAYER.IDLE, true);
         }
         break;
       case PLAYER_STATE.WALKING:
         if(isCrouched) {
-          this.anims.play(ANIMS.DINO.CROUCH_WALK, true)
+          //this.anims.play(ANIMS.DINO.CROUCH_WALK, true)
         } else {
-          this.anims.play(ANIMS.DINO.WALK, true);
+          //this.anims.play(ANIMS.DINO.WALK, true);
         }
         break;
       default:

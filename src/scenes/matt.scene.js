@@ -104,6 +104,6 @@ export class MattScene extends Phaser.Scene {
     }
 
     update() {
-      this.player.update();
+      //this.player.update();
     }
 }
