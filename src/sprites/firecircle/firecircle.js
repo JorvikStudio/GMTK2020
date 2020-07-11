@@ -23,9 +23,6 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         var height = 100;
         var width = 50;
 
-        // var height = 150;
-        // var width = 100;
-
         this.shell = new Phaser.Curves.Ellipse(this.x, this.y, width, height);
         
         // this.drawCurve(this.shell);

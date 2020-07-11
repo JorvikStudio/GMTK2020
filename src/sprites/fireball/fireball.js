@@ -11,7 +11,7 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
       this.pi = 0;
 
       this.createFlightpath();
-  }
+    }
 
   createFlightpath ()
   {
