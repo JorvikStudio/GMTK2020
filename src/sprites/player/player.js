@@ -1,6 +1,8 @@
 import {config, game} from "../../index";
 import { ANIMS, PLAYER_STATE } from "./_cst";
 import { Fireball } from "../fireball/fireball";
+import { Firecircle } from "../firecircle/firecircle"
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
     var x = config.width / 2;
@@ -39,10 +41,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       // Debug here
     }
 
+    // need powers mapper here
+    if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
+      const direction =  this.flipX ? -1 : 1 // probably need something here to determine directional shots
+      this.spell = new Firecircle(this.scene, this.x, this.y, direction);
+      this.spell.update();
+    }
+
     if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
       const direction = this.flipX ? -1 : 1
-      const fb = new Fireball(this.scene, this.x, this.y, direction);
-      fb.update();
+      this.spell = new Fireball(this.scene, this.x, this.y, direction);
+      this.spell.update();
+    }
+
+    if (this.spell)
+    {
+      this.spell.update();
     }
 
     if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
