@@ -32,12 +32,8 @@ export class MattScene extends Phaser.Scene {
 
       const tileset = map.addTilesetImage("Assets", "tiles");
 
-      // definitely wrong but it works so i'll leave it for now
       this.add.image(0, 200, 'sky');
-      this.add.image(400, 200, 'sky');
       this.add.image(800, 200, 'sky');
-      this.add.image(1200, 200, 'sky');
-      this.add.image(1600, 200, 'sky');
 
       this.backgroundLayer = map.createStaticLayer("backgroundLayer", tileset, 0, 0);
       this.backgroundLayer.scale = 2;
@@ -50,6 +46,11 @@ export class MattScene extends Phaser.Scene {
       this.player = new Player(this);
       this.enemy = new Enemy1(this);
       this.enemy2 = new Enemy2(this);
+
+      // set bounds so the camera won't go outside the game world
+      this.cameras.main.setBounds(0, 0, 1600, 610);
+      // make the camera follow the player
+      this.cameras.main.startFollow(this.player);
 
       this.physics.add.collider(this.player, this.mainLayer);
       this.physics.add.collider(this.enemy, this.mainLayer);

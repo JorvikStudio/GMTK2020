@@ -9,7 +9,7 @@ import { PreloadScene } from "./scenes/_preload.scene";
 export const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
-  width: 1600,
+  width: 800,
   height: 600,
   scene: [PreloadScene, MattScene, MainMenu, SceneA],
   render: {
