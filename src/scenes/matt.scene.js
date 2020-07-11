@@ -1,5 +1,6 @@
 import { SCENE_NAMES } from "../_cst";
 import { Player } from "../sprites/player/player";
+import { Enemy1 } from "../sprites/enemy1/enemy1";
 import player_dino from "../assets/spritesheets/dino.png"
 
 import tiles from "../assets/tilesets/matt/tiles.png";
@@ -93,8 +94,10 @@ export class MattScene extends Phaser.Scene {
       });
       
       this.player = new Player(this);
+      this.enemy = new Enemy1(this);
 
       this.physics.add.collider(this.player, this.mainLayer);
+      this.physics.add.collider(this.enemy, this.mainLayer);
       
     }
 
