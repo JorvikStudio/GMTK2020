@@ -19,6 +19,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.playerJumpHeight = 650;
     this.isJumping = false;
     this.isCasting = false;
+    this.invincible = false;
     this.setBounce(0, 0);
     this.setImmovable(false);
     this.state = PLAYER_STATE.IDLE;
@@ -125,14 +126,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   damage() {
-    if(!this.blockedInput) {
+    if(!this.invincible) {
       console.log("damage");
       this.anims.play(ANIMS.PLAYER.DAMAGED);
       this.blockedInput = true;
       this.setVelocityX(300 * this.getFacingDirection() * -1);
       this.setVelocityY(-200);
+      this.invincible = true;
+
+      const timeout = setTimeout(() => { 
+        console.log("timer");
+        this.invincible = false;
+      }, 3000);
     }
-    
   }
 
   animComplete(animation, frame) {
