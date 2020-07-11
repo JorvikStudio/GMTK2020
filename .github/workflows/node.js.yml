@@ -32,4 +32,4 @@ jobs:
       with:
         # Artifact name
         name: BuildArtifacts
-        path: /**
+        path: ./*
