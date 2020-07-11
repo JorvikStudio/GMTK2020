@@ -16,20 +16,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
     this.keyboard = this.scene.input.keyboard.addKeys(Phaser.Input.Keyboard.KeyCodes);
 
-    //this.resetSize(false);
-
     this.playerJumpHeight = 650;
     this.isJumping = false; 
     this.state = PLAYER_STATE.IDLE;
-    this.body.setSize(24, 38, true);
+    this.body.setSize(24, 38);
     this.scale = 1.5
     console.log(this);
     //this.body.updateCenter();
     
-    //this.body.offset = ({x: 10, y: 30});
+    this.body.offset = ({x: -1, y: 0});
   }
 
   update() {
+    console.log(this.body.touching.down)
     this.body.updateCenter();
     let isCrouched = false;
     let playerSpeed = 250;
@@ -94,13 +93,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.state = PLAYER_STATE.IDLE;
     }
 
-    if(this.cursorKeys.down.isDown) {
-      //this.crouch(this.flipX);
-      isCrouched = true;
-    } else {
-      //this.resetSize();
-    }
-    
     switch(this.state) {
       case PLAYER_STATE.JUMPING:
         this.anims.play(ANIMS.PLAYER.JUMP);
@@ -132,16 +124,4 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-this.playerJumpHeight);
   }
 
-
-  /* 110% not the way to do this with offsets, need to look into this more */
-  resetSize(flipped) {
-    const multiplier = flipped ? -1 : 1;
-    this.body.setOffset(4 * multiplier, 0);
-    this.body.setSize(16, 18, false);
-  }
-
-  crouch() {
-    this.body.setOffset(0, 4);
-    this.body.setSize(20, 14, false);
-  }
 }

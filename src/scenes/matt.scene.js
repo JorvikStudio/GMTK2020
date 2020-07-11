@@ -43,7 +43,11 @@ export class MattScene extends Phaser.Scene {
       this.mainLayer = map.createStaticLayer("mainLayer", tileset, 0, 0);
       this.mainLayer.setCollisionByProperty({collides: true});
       this.mainLayer.scale = 2;
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> Character animation working somewhat.
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
       this.player = new Player(this);

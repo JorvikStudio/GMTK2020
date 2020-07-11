@@ -41,12 +41,12 @@ export class PreloadScene extends Phaser.Scene {
       key: ANIMS.PLAYER.IDLE,
       frames: this.anims.generateFrameNames("player_atlas", {
         start: 1,
-        end: 8,
+        end: 10,
         zeroPad: 2,
         prefix: "idle",
         suffix: ".png"
       }),
-      frameRate: 8,
+      frameRate: 10,
       repeat: -1
     });
 
