@@ -10,36 +10,46 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         
         this.pi = 0;
 
-        this.createCurve();
+        this.createShellFlightPath();
+        this.createShellEntryPath(this.shell.getPoint(0.85));
+
+        // this.curve = this.entryPath;
+        // this.curve.add(this.shell)
+        this.curve = this.shell;
     }
   
-    createCurve ()
+    createShellFlightPath()
     {
-        this.size = 32;
+        var height = 100;
+        var width = 50;
 
-        this.graphics = this.scene.add.graphics();
+        var height = 150;
+        var width = 100;
+
+        this.shell = new Phaser.Curves.Ellipse(this.x, this.y, width, height);
         
-        this.curve = new Phaser.Curves.Spline();
+        this.drawCurve(this.shell);
+    }
+    
+    createShellEntryPath(endPoint)
+    {
+        var startPoint = new Phaser.Math.Vector2(this.x, this.y);
+        var controlPoint = new Phaser.Math.Vector2((this.x+(this.width/2)), this.y-60);
 
-        for (var i = 0; i<8; i++)
-        {
-            this.curve.addPoint((this.x + (60*i)), (this.y + 30*(Math.sin(i*90))))
-        }        
+        this.entryPath = new Phaser.Curves.QuadraticBezier(startPoint, controlPoint, endPoint);
 
-        this.size = 32;
-
-        this.points = this.curve.getDistancePoints(this.size);
+        this.drawCurve(this.entryPath);
     }
 
     // this will draw the flight path, more for debugging than anything else
-    drawCurve()
+    drawCurve(curve)
     {
+        this.graphics = this.scene.add.graphics();
         this.graphics.lineStyle(1, 0xffffff, 1);
 
-        this.curve.draw(this.graphics, 64);
+        curve.draw(this.graphics, 64);
     
         this.graphics.fillStyle(0x00ff00, 1);
-    
         this.graphics.lineStyle(1, 0x00ff00, 1);
 
     }
