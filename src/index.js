@@ -3,6 +3,7 @@ import logoImg from "./assets/logo.png";
 import { MainMenu } from "./scenes/menu.scene";
 import { SceneA } from "./scenes/sceneA.scene";
 import { MattScene } from "./scenes/matt.scene";
+import { PreloadScene } from "./scenes/_preload.scene";
 
 
 export const config = {
@@ -10,15 +11,14 @@ export const config = {
   parent: "phaser-example",
   width: 800,
   height: 600,
-  // scene: [MainMenu, MattScene, SceneA],
-  scene: [MattScene, SceneA],
+  scene: [PreloadScene, MattScene, MainMenu, SceneA],
   render: {
     pixelArt: true
   },
   physics: {
     default: "arcade",
     arcade: {
-      //debug: true,
+      debug: true,
       gravity: { y: 1500 } // Top down game, so no gravity
     }
   }
