@@ -8,6 +8,7 @@ import background from "../assets/tilesets/gino/Background.png";
 import gino_level from "../assets/tilesets/gino/gino_level.json";
 import { ANIMS } from "../sprites/player/_cst";
 import { Enemy2 } from "../sprites/enemy/enemy2";
+import { Enemy3 } from "../sprites/enemy/enemy3";
 
 export class MattScene extends Phaser.Scene {
 
@@ -46,6 +47,7 @@ export class MattScene extends Phaser.Scene {
       this.player = new Player(this);
       this.enemy = new Enemy1(this);
       this.enemy2 = new Enemy2(this);
+      //this.enemy3 = new Enemy3(this);
 
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);
@@ -67,6 +69,7 @@ export class MattScene extends Phaser.Scene {
         delay: 0
       };
       this.music.play(musicConfig);
+      //this.physics.add.collider(this.enemy3, this.mainLayer);
       
     }
 

@@ -8,5 +8,11 @@ export const ANIMS = {
         IDLE: "enemy2_idle",
         HIT: "enemy2_hit",
         ATTACK: "enemy2_attack"
+    },
+    ENEMY3: {
+        IDLE: "enemy3_idle",
+        HIT: "enemy3_hit",
+        ATTACK_LEFT: "enemy3_attack_left",
+        ATTACK_RIGHT: "enemy3_attack_right"
     }
 }
