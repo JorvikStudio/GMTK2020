@@ -89,7 +89,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     
     switch(this.state) {
       case PLAYER_STATE.JUMPING:
-        //this.anims.play(ANIMS.DINO.JUMP);
+        this.anims.play(ANIMS.PLAYER.JUMP);
         break;
       case PLAYER_STATE.IDLE:
         if(isCrouched) {
@@ -102,7 +102,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if(isCrouched) {
           //this.anims.play(ANIMS.DINO.CROUCH_WALK, true)
         } else {
-          //this.anims.play(ANIMS.DINO.WALK, true);
+          this.anims.play(ANIMS.PLAYER.WALK, true);
         }
         break;
       default:

@@ -9,7 +9,9 @@ export const ANIMS = {
   PLAYER: {
     IDLE: "player_idle",
     WALK: "player_walk",
-    JUMP: "player_jump"
+    JUMP: "player_jump",
+    JUMP_LAUNCH: "player_jump_launch",
+    JUMP_LAND: "player_jump_land"
   }
 }
 

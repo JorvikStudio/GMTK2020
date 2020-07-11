@@ -15,19 +15,67 @@ export class PreloadScene extends Phaser.Scene {
 
   create() {
 
-    const frameNames = this.anims.generateFrameNames("player_atlas", {
-      start: 1,
-      end: 4,
-      zeroPad: 2,
-      prefix: "idle",
-      suffix: ".png"
-    });
-
-    console.log(frameNames);
-
     this.anims.create({
       key: ANIMS.PLAYER.IDLE,
-      frames: frameNames,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 8,
+        zeroPad: 2,
+        prefix: "idle",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ANIMS.PLAYER.WALK,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 8,
+        zeroPad: 2,
+        prefix: "run",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ANIMS.PLAYER.JUMP_LAUNCH,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 2,
+        zeroPad: 2,
+        prefix: "jump_start",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ANIMS.PLAYER.JUMP,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 4,
+        zeroPad: 2,
+        prefix: "jump_mid",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: ANIMS.PLAYER.JUMP_LAND,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 1,
+        zeroPad: 2,
+        prefix: "jump_landing",
+        suffix: ".png"
+      }),
       frameRate: 8,
       repeat: -1
     });
