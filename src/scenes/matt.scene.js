@@ -43,56 +43,6 @@ export class MattScene extends Phaser.Scene {
       });
       */
 
-      this.anims.create({
-        key: ANIMS.DINO.JUMP,
-        frames: this.anims.generateFrameNumbers(this.player_dino_sheet, {
-          start: 12,
-          end: 12
-        }),
-        frameRate: 8,
-        repeat: -1
-      });
-
-      this.anims.create({
-        key:ANIMS.DINO.CROUCH,
-        frames: this.anims.generateFrameNumbers(this.player_dino_sheet, {
-          start: 17,
-          end: 17
-        }),
-        frameRate: 8,
-        repeat: -1
-      });
-
-      this.anims.create({
-        key:ANIMS.DINO.CROUCH_WALK,
-        frames: this.anims.generateFrameNumbers(this.player_dino_sheet, {
-          start: 18,
-          end: 23
-        }),
-        frameRate: 8,
-        repeat: -1
-      });
-      //animations
-      this.anims.create({
-        key: ANIMS.DINO.IDLE,
-        frames: this.anims.generateFrameNumbers(this.player_dino_sheet, {
-            start: 0,
-            end: 3
-        }),
-        frameRate: 8,
-        repeat: -1
-      });
-      
-      this.anims.create({
-        key: ANIMS.DINO.WALK,
-        frames: this.anims.generateFrameNumbers(this.player_dino_sheet, {
-          start: 4,
-          end: 9
-        }),
-        frameRate: 8,
-        repeat: -1
-      });
-      
       this.player = new Player(this);
       this.enemy = new Enemy1(this);
       this.enemy2 = new Enemy2(this);
@@ -100,10 +50,24 @@ export class MattScene extends Phaser.Scene {
       this.physics.add.collider(this.player, this.mainLayer);
       this.physics.add.collider(this.enemy, this.mainLayer);
       this.physics.add.collider(this.enemy2, this.mainLayer);
+
+      this.enemies = this.add.group();
+
+      this.enemies.add(this.enemy);
+      this.enemies.add(this.enemy2);
+
+      //this.physics.add.collider(this.player, this.enemies);
       
     }
 
     update() {
       this.player.update();
+
+      this.enemy.update();
+      this.enemy2.update();
+
+      this.physics.overlap(this.player, this.enemies, () => {
+        this.player.damage();
+      });
     }
 }
