@@ -30,7 +30,6 @@ export class MattScene extends Phaser.Scene {
       this.mainLayer.setCollisionByProperty({collides: true});
 
       this.mainLayer.scale = 2;
-      
 
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
