@@ -18,7 +18,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.resetSize(false);
     console.log(this.keyboard);
 
-    this.playerJumpHeight = 600;
+    this.playerJumpHeight = 650;
     this.isJumping = false; 
     this.state = PLAYER_STATE.IDLE;
   }
@@ -26,7 +26,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     
     let isCrouched = false;
-    let playerSpeed = 100;
+    let playerSpeed = 250;
 
     this.debugShowBody = this.keyboard.SHIFT.isDown;
     this.jumpingFrame = false;
