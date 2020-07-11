@@ -17,7 +17,7 @@ export const config = {
     default: "arcade",
     arcade: {
       //debug: true,
-      gravity: { y: 800 } // Top down game, so no gravity
+      gravity: { y: 1500 } // Top down game, so no gravity
     }
   }
 };
