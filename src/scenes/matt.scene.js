@@ -46,12 +46,21 @@ export class MattScene extends Phaser.Scene {
 
       const debugGraphics = this.add.graphics().setAlpha(0.75);
       
+      /*
+      mainLayer.renderDebug(debugGraphics, {
+        tileColor: null, // Color of non-colliding tiles
+        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+      });
+      */
+
+      this.enemies = this.add.group();
       this.player = new Player(this);
-      this.enemy1 = new Enemy1(this);
-      this.enemy2 = new Enemy2(this);
-      this.enemy3 = new Enemy3(this);
-      this.enemy4 = new Enemy4(this);
-      this.enemy5 = new Enemy5(this);
+      this.enemies.add(new Enemy1(this));
+      this.enemies.add(new Enemy2(this));
+      this.enemies.add(new Enemy3(this));
+      this.enemies.add(new Enemy4(this));
+      this.enemies.add(new Enemy5(this));
 
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);
@@ -59,11 +68,7 @@ export class MattScene extends Phaser.Scene {
       this.cameras.main.startFollow(this.player);
 
       this.physics.add.collider(this.player, this.mainLayer);
-      this.physics.add.collider(this.enemy1, this.mainLayer);
-      this.physics.add.collider(this.enemy2, this.mainLayer);
-      this.physics.add.collider(this.enemy3, this.mainLayer);
-      this.physics.add.collider(this.enemy4, this.mainLayer);
-      this.physics.add.collider(this.enemy5, this.mainLayer);
+      this.physics.add.collider(this.enemies, this.mainLayer);
 
       this.music = this.sound.add("music");
       var musicConfig = {
@@ -75,25 +80,13 @@ export class MattScene extends Phaser.Scene {
         loop: false,
         delay: 0
       };
-<<<<<<< HEAD
+
       this.music.play(musicConfig);    
-=======
-      this.music.play(musicConfig);
-      this.enemies = this.add.group();
-
-      this.enemies.add(this.enemy);
-      this.enemies.add(this.enemy2);
-
-      //this.physics.add.collider(this.player, this.enemies);
->>>>>>> player is bounced back when they are damaged
       
     }
 
     update() {
       this.player.update();
-
-      this.enemy.update();
-      this.enemy2.update();
 
       this.physics.overlap(this.player, this.enemies, () => {
         this.player.damage();

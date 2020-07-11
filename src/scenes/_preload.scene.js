@@ -117,6 +117,19 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     this.anims.create({
+      key: ANIMS.PLAYER.JUMP,
+      frames: this.anims.generateFrameNames("player_atlas", {
+        start: 1,
+        end: 4,
+        zeroPad: 2,
+        prefix: "jump_mid",
+        suffix: ".png"
+      }),
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.anims.create({
       key: ENEMY_ANIMS.ENEMY1.IDLE,
       frames: this.anims.generateFrameNames("enemy1_atlas", {
         start: 1,

@@ -138,10 +138,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   animComplete(animation, frame) {
     const key = animation.key;
     const direction = this.flipX;
-    console.log(key);
     if(key === ANIMS.PLAYER.DAMAGED) {
-      console.log("damage done");
-      
       this.blockedInput = false;
     }
   }
