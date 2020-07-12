@@ -27,7 +27,17 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        this.patrolPoints();
+        if (this.enemyPatrols()) {
+            this.patrolPoints();
+        }
+    }
+
+    enemyPatrols() {
+        return this.patrolBoundaries != null;
+    }
+
+    getEnemySpeed() {
+        return 50;
     }
 
     patrolPoints() {
@@ -35,7 +45,7 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
             const currentVelocity = this.body.velocity.x;
             const isGoingLeft = currentVelocity < 0;
             const isGoingRight = currentVelocity > 0;
-            const velocityMultiplier = 50;
+            const velocityMultiplier = this.getEnemySpeed();
             if (!isGoingLeft && !isGoingRight) {
                 const startingVelocity = velocityMultiplier * this.getRandomDirection()
                 this.setVelocityX(startingVelocity);
