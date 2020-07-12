@@ -43,8 +43,6 @@ export class Level1Scene extends Scene {
       this.mainLayer = map.createStaticLayer("mainLayer", tileset, 0, 0);
       this.mainLayer.setCollisionByProperty({collides: true});
       this.mainLayer.scale = 2;
-
-      this.add.graphics().setAlpha(0.75); //debugGraphics
       
       this.enemies = this.add.group();
       this.spells = this.add.group();
@@ -78,8 +76,11 @@ export class Level1Scene extends Scene {
         this.player.damage();
       });
 
-      this.physics.overlap(this.spells, this.enemies, (spell, enemy) => {
+      this.physics.collide(this.spells, this.enemies, (spell, enemy) => {
         enemy.takeDamage(30);
+        if(spell.destroySelf) {
+          spell.destroySelf();
+        }
       });
 
       for(const enemy of this.enemies.getChildren()) {
