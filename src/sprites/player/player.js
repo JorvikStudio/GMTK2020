@@ -185,22 +185,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   castSpell(spellName) {    
 
-    if (spellName == 'fireball'){
+    if (spellName == 'fireball') {
       const direction = this.flipX ? -1 : 1
-      this.castFireball(direction);
+      this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
     }
-    else if (spellName == 'firecircle'){
+    else if (spellName == 'firecircle') {
       const direction = this.flipX ? -1 : 1
       this.castFirecircle(direction);
     }
-    else if (spellName == 'bastion'){
+    else if (spellName == 'bastion') {
       const direction = this.flipX ? -1 : 1
-      this.castBastion(direction);
+      this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
     }
-  }
-
-  castFireball(direction) {
-    this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+    else if (spellName == 'smite') {
+      const direction = this.flipX ? -1 : 1
+      this.scene.spells.add(new Smite(this.scene, this.x, this.y, direction));
+    }          
   }
 
   castFirecircle(direction) {
@@ -214,10 +214,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         clearInterval(interval);
       }
     }, 500);
-  }
-
-  castBastion(direction) {
-    this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
   }
 
   castSingleFireCircle() {
