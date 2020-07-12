@@ -57,9 +57,11 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
       for (var i = 0; i<3; i++)
       {
           this.percent = (this.pi+i)/70;
-          var x = this.curve.getPoint(this.percent).x;
-          var y = this.curve.getPoint(this.percent).y;
-          this.drawfireball(x, y, (i+1)*3);
+          const point = this.curve.getPoint(this.percent);
+          if (point) {
+            this.drawfireball(point.x, point.y, (i+1)*3);
+          }
+          
       }  
       
       this.pi++;
