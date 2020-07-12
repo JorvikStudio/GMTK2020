@@ -17,9 +17,9 @@ module.exports = merge(base, {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src', to: 'dist' },
-      ],
-    }),
+        { from: 'src', to: 'src' }
+      ]
+    })
   ],
   optimization: {
     minimizer: [
