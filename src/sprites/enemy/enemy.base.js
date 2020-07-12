@@ -44,8 +44,16 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         this.setSizeToFrame();
-        if (this.enemyPatrols()) {
+        if (this.enemyPatrols() && this.active) {
             this.patrolPoints();
+        }
+
+        if(this.isDead) {
+            this.tint = 0x333333;
+        } else if(this.isDamaged) {
+            this.tint = 0xBF1313;
+        } else {
+            this.clearTint();
         }
     }
 
@@ -93,14 +101,33 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
     }
 
     takeDamage(damage) {
-        this.play(this.getHitAnimationKey());
-        setTimeout(() => {
-            this.play(this.getIdleAnimationKey());
-        }, 500);
+
         this.health = this.health - damage;
         console.log(`Took ${damage} damage. Health is now ${this.health}.`);
         if (this.health < 0) {
-            console.log("die");
+            this.die();
+        } else {
+            this.play(this.getHitAnimationKey());
+            this.isDamaged = true;
+            setTimeout(() => {
+                this.play(this.getIdleAnimationKey());
+                this.isDamaged = false;
+            }, 500);
         }
+    }
+
+    die() {
+        this.body.destroy();
+        this.scene.tweens.add({
+            targets: this,
+            angle: 90,
+            ease: "Power1",
+            duration:500,
+        })
+        this.isDead = true;
+        this.active = false;
+        setTimeout(() => {
+            this.destroy();
+        }, 4000);
     }
 }
