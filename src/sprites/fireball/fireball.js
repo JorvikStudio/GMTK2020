@@ -8,6 +8,11 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
       var ball = scene.add.graphics();
 
       this.ball = ball;
+      this.scene.physics.world.enable(this);
+
+      this.body.setImmovable(true);
+      this.body.allowGravity = false;
+      this.body.isCircle = true;
       
       this.pi = 0;
 
@@ -53,6 +58,7 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
   update ()
   {
       this.ball.clear();
+      const destroySelf = false;
       
       for (var i = 0; i<3; i++)
       {
@@ -61,10 +67,20 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
           if(percent <= 1) {
             const point = this.curve.getPoint(percent);
             if (point) {
-              this.drawfireball(point.x, point.y, (i+1)*3);
+
+              const size = (i+1)*3;
+              const offset = size * 1.5;
+
+              this.drawfireball(point.x, point.y, size);
+              this.body.position = new Phaser.Math.Vector2(point.x - offset, point.y - offset);
+              this.body.updateCenter();
             }
           }
-      }  
+      }
+      
+      if(destroySelf) {
+        this.destroy();
+      }
       
       this.pi++;
   }
