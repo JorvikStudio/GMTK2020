@@ -7,11 +7,12 @@ import tiles from "../assets/tilesets/gino/Assets.png";
 import background from "../assets/tilesets/gino/Background.png";
 import gino_level_3 from "../assets/tilesets/gino/gino_level_3.json";
 
-// import { Enemy1 } from "../sprites/enemy/enemy1";
-// import { Enemy2 } from "../sprites/enemy/enemy2";
-// import { Enemy4 } from "../sprites/enemy/enemy4";
-// import { Enemy5 } from "../sprites/enemy/enemy5";
-// import { Enemy3 } from "../sprites/enemy/enemy3";
+import { Enemy1 } from "../sprites/enemy/enemy1";
+import { Enemy2 } from "../sprites/enemy/enemy2";
+import { Enemy4 } from "../sprites/enemy/enemy4";
+import { Enemy5 } from "../sprites/enemy/enemy5";
+import { Enemy3 } from "../sprites/enemy/enemy3";
+import { Fireball } from "../sprites/fireball/fireball";
 
 export class Level3Scene extends Scene {
 
@@ -54,12 +55,13 @@ export class Level3Scene extends Scene {
       */
 
       this.enemies = this.add.group();
-      this.player = new Player(this);
-      // this.enemies.add(new Enemy1(this));
-      // this.enemies.add(new Enemy2(this));
-      // this.enemies.add(new Enemy3(this));
-      // this.enemies.add(new Enemy4(this));
-      // this.enemies.add(new Enemy5(this));
+      this.player = new Player(this, 100, 465);
+
+      this.enemies.add(new Enemy1(this, 400, 465));
+      this.enemies.add(new Enemy2(this, 700, 525));
+      this.enemies.add(new Enemy3(this, 900, 300));
+      this.enemies.add(new Enemy4(this, 1000, 410));
+      this.enemies.add(new Enemy5(this, 1200, 410));
 
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);
