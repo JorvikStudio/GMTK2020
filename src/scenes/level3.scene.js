@@ -12,7 +12,6 @@ import { Enemy2 } from "../sprites/enemy/enemy2";
 import { Enemy4 } from "../sprites/enemy/enemy4";
 import { Enemy5 } from "../sprites/enemy/enemy5";
 import { Enemy3 } from "../sprites/enemy/enemy3";
-import { Fireball } from "../sprites/fireball/fireball";
 
 export class Level3Scene extends Scene {
 
@@ -34,6 +33,7 @@ export class Level3Scene extends Scene {
       const map = this.make.tilemap({key: "map"});
 
       const tileset = map.addTilesetImage("Assets", "tiles");
+      this.spellList = ['bastion', 'firecircle'];
 
       this.add.image(0, 300, 'sky');
       this.add.image(800, 300, 'sky');
@@ -45,18 +45,11 @@ export class Level3Scene extends Scene {
       this.mainLayer.scale = 2;
 
       this.add.graphics().setAlpha(0.75); // debugGraphics
-      
-      /*
-      mainLayer.renderDebug(debugGraphics, {
-        tileColor: null, // Color of non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-      });
-      */
 
       this.enemies = this.add.group();
-      this.player = new Player(this, 100, 465);
+      this.spells = this.add.group();
 
+      this.player = new Player(this, 100, 465);
       this.enemies.add(new Enemy1(this, 400, 465));
       this.enemies.add(new Enemy2(this, 700, 525));
       this.enemies.add(new Enemy3(this, 900, 300));
@@ -70,6 +63,14 @@ export class Level3Scene extends Scene {
 
       this.physics.add.collider(this.player, this.mainLayer);
       this.physics.add.collider(this.enemies, this.mainLayer);      
+
+      this.physics.add.collider(this.spells, this.mainLayer, (spell, wall) => {
+        if(spell.onImpact) {
+          spell.onImpact();
+        }
+      });
+
+      this.physics.add.collider(this.enemies, this.spells);
     }
 
     update() {

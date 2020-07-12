@@ -5,8 +5,6 @@ import { Firecircle } from "../firecircle/firecircle";
 import { Bastion } from "../bastion/bastion"
 // import { SCENE_NAMES } from "../../_cst";
 
-const PLAYER_HEALTH = 100;
-
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
 
@@ -26,13 +24,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.state = PLAYER_STATE.IDLE;
     this.body.setSize(24, 38);
     this.scale = 1.5
-    this.health = PLAYER_HEALTH;
+    console.log(this);
     //this.body.updateCenter();
     
     this.body.offset = ({x: -1, y: 0});
 
     this.on("animationcomplete", this.animComplete, this);
-    this.blockedInput = false
+    this.blockedInput = false;
+
+    this.spellList = this.scene.spellList;
+    this.currentSpell = '';
+
+    this.chooseSpell();
+    setInterval(() => { 
+        this.chooseSpell();    
+    }, 5000);
   }
 
   update() {
@@ -58,16 +64,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
-      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
-        const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
-      }
-
-      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
-        const direction = this.flipX ? -1 : 1
-        this.castFirecircle();
-      }
-  
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
@@ -137,19 +133,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-this.playerJumpHeight);
   }
 
-  damage(damageTaken) {
+  damage() {
     if(!this.invincible) {
-      this.health = this.health - damageTaken;
-      if (this.health < 0) {
-        console.log("OH DEAR, OH DEAR");
-      }
-      console.log(`PLAYER: Health is ${this.health}, Damage taken was ${damageTaken}.`);
+      console.log("damage");
       this.anims.play(ANIMS.PLAYER.DAMAGED);
       this.blockedInput = true;
       this.setVelocityX(300 * this.getFacingDirection() * -1);
       this.setVelocityY(-200);
       this.invincible = true;
-      
+
       setTimeout(() => { 
         console.log("timer");
         this.invincible = false;
@@ -169,11 +161,43 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
   }
 
-  castFirecircle() {
+  chooseSpell() {
+    let spells = this.spellList.filter(spellName => spellName != this.currentSpell);
+    this.currentSpell = spells[Math.floor(Math.random() * spells.length)];
+    let count = 0;
+    this.castSpell(this.currentSpell);
+
+    const interval = setInterval(() => {
+      if (count < 4) {
+        if(this.currentSpell != 'firecircle') { this.castSpell(this.currentSpell); }
+        count++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  castSpell(spellName) {    
+
+    if (spellName == 'fireball'){
+      const direction = this.flipX ? -1 : 1
+      this.castFireball(direction);
+    }
+    else if (spellName == 'firecircle'){
+      const direction = this.flipX ? -1 : 1
+      this.castFirecircle(direction);
+    }
+  }
+
+  castFireball(direction) {
+    this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+  }
+
+  castFirecircle(direction) {
     let count = 0;
     this.castSingleFireCircle();
     const interval = setInterval(() => {
-      if(count < 2) {
+      if(count < 3) {
         this.castSingleFireCircle();
         count++;
       } else {
@@ -189,7 +213,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     setTimeout(() => {
       fc.active = false;
       fc.destroySelf();
-    }, 3000);
+    }, 5000);
   }
 
 }
