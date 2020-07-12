@@ -55,6 +55,7 @@ export class Level1Scene extends Phaser.Scene {
       */
 
       this.enemies = this.add.group();
+      this.spells = this.add.group();
       this.player = new Player(this);
       this.enemies.add(new Enemy1(this));
       this.enemies.add(new Enemy2(this));
@@ -77,5 +78,13 @@ export class Level1Scene extends Phaser.Scene {
       this.physics.overlap(this.player, this.enemies, () => {
         this.player.damage();
       });
+
+      for(const enemy of this.enemies.getChildren()) {
+        enemy.update();
+      }
+
+      for(const spell of this.spells.getChildren()) {
+        spell.update();
+      }
     }
 }
