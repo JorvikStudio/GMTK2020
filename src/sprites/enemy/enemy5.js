@@ -2,12 +2,8 @@ import { ANIMS } from "./_cst"
 import { EnemyBase } from "./enemy.base";
 
 export class Enemy5 extends EnemyBase {
-    constructor(scene, x, y) {
-        super(scene, x, y, "enemy5", 64, 64);
-        this.patrolBoundaries = {
-            left: 1050,
-            right: 1600
-        };
+    constructor(scene, x, y, patrolBoundariesLeft, patrolBoundariesRight) {
+        super(scene, x, y, "enemy5", 64, 64, patrolBoundariesLeft, patrolBoundariesRight);     
     }
 
     startBaseAnimation() {

@@ -50,11 +50,11 @@ export class Level3Scene extends Scene {
       this.spells = this.add.group();
 
       this.player = new Player(this, 100, 465);
-      this.enemies.add(new Enemy1(this, 400, 465));
-      this.enemies.add(new Enemy2(this, 700, 525));
-      this.enemies.add(new Enemy3(this, 900, 300));
-      this.enemies.add(new Enemy4(this, 1000, 410));
-      this.enemies.add(new Enemy5(this, 1200, 410));
+      this.enemies.add(new Enemy1(this, 400, 465, 0, 0));
+      this.enemies.add(new Enemy2(this, 700, 525, 0, 0));
+      this.enemies.add(new Enemy3(this, 900, 300, 0, 0));
+      this.enemies.add(new Enemy4(this, 1000, 410, 0, 0));
+      this.enemies.add(new Enemy5(this, 1200, 410, 0, 0));
 
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);

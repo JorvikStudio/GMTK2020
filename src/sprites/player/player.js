@@ -65,11 +65,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
-      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
-        const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
-      }
-
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
         const direction = this.flipX ? -1 : 1
         this.castFirecircle();
@@ -198,6 +193,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       const direction = this.flipX ? -1 : 1
       this.castFirecircle(direction);
     }
+    else if (spellName == 'bastion'){
+      const direction = this.flipX ? -1 : 1
+      this.castBastion(direction);
+    }
   }
 
   castFireball(direction) {
@@ -215,6 +214,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         clearInterval(interval);
       }
     }, 500);
+  }
+
+  castBastion(direction) {
+    this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
   }
 
   castSingleFireCircle() {
