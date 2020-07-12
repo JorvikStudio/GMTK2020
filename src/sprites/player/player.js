@@ -67,7 +67,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Smite(this.scene, this.x, this.y, direction));
+        this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
       }
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
