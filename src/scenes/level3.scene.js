@@ -50,8 +50,8 @@ export class Level3Scene extends Scene {
       this.spells = this.add.group();
 
       this.player = new Player(this, 100, 465);
-      this.enemies.add(new Enemy1(this, 400, 465, 0, 0));
-      this.enemies.add(new Enemy2(this, 700, 525, 0, 0));
+      this.enemies.add(new Enemy1(this, 400, 465, 200, 500));
+      this.enemies.add(new Enemy2(this, 700, 525, 600, 800));
       this.enemies.add(new Enemy3(this, 900, 300, 0, 0));
       this.enemies.add(new Enemy4(this, 1000, 410, 0, 0));
       this.enemies.add(new Enemy5(this, 1200, 410, 0, 0));
@@ -79,5 +79,20 @@ export class Level3Scene extends Scene {
       this.physics.overlap(this.player, this.enemies, () => {
         this.player.damage();
       });
+
+      this.physics.collide(this.spells, this.enemies, (spell, enemy) => {
+        enemy.takeDamage(30);
+        if(spell.destroySelf) {
+          spell.destroySelf();
+        }
+      });
+
+      for(const enemy of this.enemies.getChildren()) {
+        enemy.update();
+      }
+
+      for(const spell of this.spells.getChildren()) {
+        spell.update();
+      }
     }
 }

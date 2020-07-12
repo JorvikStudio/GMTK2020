@@ -1,4 +1,4 @@
-# Super Wizard by Yorvik Studio
+# ControlFreak by Yorvik Studio
 ![GitHub Logo](/src/assets/logo.png)
 
 ----

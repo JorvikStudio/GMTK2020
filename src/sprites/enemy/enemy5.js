@@ -13,14 +13,17 @@ export class Enemy5 extends EnemyBase {
     scheduleAnimations() {
 
         setTimeout(() => {
+            this.body.setSize(30, 64);
             this.play(ANIMS.ENEMY5.HIT);
         }, 3000);
 
         setTimeout(() => {
+            this.body.setSize(64, 64);
             this.play(ANIMS.ENEMY5.ATTACK);
         }, 6000);
 
         setTimeout(() => {
+            this.body.setSize(30, 64);
             this.play(ANIMS.ENEMY5.IDLE);
         }, 9000);
 
