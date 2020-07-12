@@ -49,6 +49,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(Phaser.Input.Keyboard.JustDown(this.keyboard.ESC)) {
       this.scene.scene.stop();
+      this.scene.scene.start(SCENE_NAMES.MAIN_MENU);
     }
 
     this.body.updateCenter();
