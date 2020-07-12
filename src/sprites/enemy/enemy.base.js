@@ -12,6 +12,19 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
         this.setImmovable(true);
         this.hasHitFloor = false;
         this.checkFloors = false;
+        this.health = this.getStartingHealth();
+    }
+
+    getStartingHealth() {
+        return 100;
+    }
+
+    getHitAnimationKey() {
+        // Implement me
+    }
+
+    getIdleAnimationKey() {
+        // Implement me;
     }
 
     startBaseAnimation() {
@@ -70,5 +83,17 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
         if (random > 0.5)
             return 1;
         return -1;
+    }
+
+    takeDamage(damage) {
+        this.play(this.getHitAnimationKey());
+        setTimeout(() => {
+            this.play(this.getIdleAnimationKey());
+        }, 500);
+        this.health = this.health - damage;
+        console.log(`Took ${damage} damage. Health is now ${this.health}.`);
+        if (this.health < 0) {
+            console.log("die");
+        }
     }
 }

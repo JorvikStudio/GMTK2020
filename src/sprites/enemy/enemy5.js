@@ -37,4 +37,12 @@ export class Enemy5 extends EnemyBase {
     getEnemySpeed() {
         return 15;
     }
+
+    getHitAnimationKey() {
+        return ANIMS.ENEMY5.HIT;
+    }
+
+    getIdleAnimationKey() {
+        return ANIMS.ENEMY5.IDLE;
+    }
 }
