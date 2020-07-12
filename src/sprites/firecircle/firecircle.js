@@ -1,10 +1,9 @@
 import Phaser from "phaser";
 export class Firecircle extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(scene, x, y, direction) {
+    constructor(scene, x, y) {
         super(scene, x, y, "firecircle");
     
-        this.direction = direction;
         var ball = scene.add.graphics();
 
         this.ball = ball;
@@ -18,7 +17,7 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
         this.body.isCircle = true;
 
-        this.createShellFlightPath();
+        this.createShellFlightPath(this.x, this.y);
         this.createShellEntryPath(this.shell.getStartPoint());
 
         this.curve = this.shell;
@@ -30,12 +29,12 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.body.isCircle = true;
     }
   
-    createShellFlightPath()
+    createShellFlightPath(x, y)
     {
         var height = 100;
         var width = 50;
 
-        this.shell = new Phaser.Curves.Ellipse(this.x, this.y, width, height);
+        this.shell = new Phaser.Curves.Ellipse(x, y, width, height);
         
         // this.drawCurve(this.shell);
     }
@@ -69,6 +68,9 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     
     update ()
     {
+
+        this.curve = this.createShellFlightPath(this.scene.player.x, this.scene.player.y)
+        
         this.ball.clear();
         const destroySelf = false;
         
@@ -118,4 +120,9 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.ball.fillStyle(0xf0652e, 1);
         this.ball.fillCircle(x, y, size);
     }
+
+    destroySelf() {
+        this.ball.clear();
+        this.destroy();
+      }
   }

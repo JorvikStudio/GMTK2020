@@ -52,12 +52,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+        this.scene.spells.add(new Fireball(this.scene, this.x, this.y));
       }
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
         const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Firecircle(this.scene, this.x, this.y, direction));
+        this.castFirecircle();
       }
   
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
@@ -158,7 +158,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   castFirecircle() {
-    
+    let count = 0;
+    this.castSingleFireCircle();
+    const interval = setInterval(() => {
+      if(count < 2) {
+        this.castSingleFireCircle();
+        count++;
+      }
+    }, 500);
+  }
+
+  castSingleFireCircle() {
+    const fc = new Firecircle(this.scene, this.x, this.y)
+    this.scene.spells.add(fc);
+
+    setTimeout(() => {
+      fc.active = false;
+      fc.destroySelf();
+    }, 3000);
   }
 
 }
