@@ -36,6 +36,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.body.updateCenter();
     let playerSpeed = 250;
+
+    if(this.invincible) {
+      this.alpha = 0.5;
+    } else {
+      this.alpha = 1;
+    }
     if(this.body.onFloor()) {
       this.setVelocityX(0);
       this.blockedInput = false;
