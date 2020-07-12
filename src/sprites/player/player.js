@@ -63,7 +63,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if(!this.blockedInput) {
-  
+
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
@@ -181,19 +181,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if (spellName == 'fireball'){
       const direction = this.flipX ? -1 : 1
-      this.castFireball();
+      this.castFireball(direction);
     }
     else if (spellName == 'firecircle'){
       const direction = this.flipX ? -1 : 1
-      this.castFirecircle();
+      this.castFirecircle(direction);
     }
   }
 
-  castFireball() {
+  castFireball(direction) {
     this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
   }
 
-  castFirecircle() {
+  castFirecircle(direction) {
     let count = 0;
     this.castSingleFireCircle();
     const interval = setInterval(() => {
