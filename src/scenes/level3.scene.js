@@ -33,7 +33,7 @@ export class Level3Scene extends Scene {
       const map = this.make.tilemap({key: "map"});
 
       const tileset = map.addTilesetImage("Assets", "tiles");
-      this.spellList = ['bastion', 'firecircle'];
+      this.spellList = ['bastion', 'fireball', 'smite'];
 
       this.add.image(0, 300, 'sky');
       this.add.image(800, 300, 'sky');
