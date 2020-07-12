@@ -1,5 +1,9 @@
-# Super Wizard by
+# Super Wizard by Yorvik Studio
 ![GitHub Logo](/src/assets/logo.png)
+
+----
+
+
 ## Repo for the GMTK Game Jam Game
 
 You are a failed experiment.. they wanted to give you *powers* and keep you under *their control*
