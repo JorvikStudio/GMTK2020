@@ -13,6 +13,7 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
 
         this.isEntryComplete = false;
 
+        this.scene.physics.world.enable(this);
         this.body.setImmovable(true);
         this.body.allowGravity = false;
         this.body.isCircle = true;
