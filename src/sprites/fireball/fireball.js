@@ -49,7 +49,6 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
   update ()
   {
       this.ball.clear();
-      const destroySelf = false;
       
       for (var i = 0; i<3; i++)
       {
