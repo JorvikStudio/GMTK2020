@@ -1,6 +1,7 @@
 /* eslint-env node */
 const merge = require("webpack-merge");
 const base = require("./base");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = merge(base, {
@@ -13,6 +14,13 @@ module.exports = merge(base, {
     maxEntrypointSize: 900000,
     maxAssetSize: 900000
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'src', to: 'dist' },
+      ],
+    }),
+  ],
   optimization: {
     minimizer: [
       new TerserPlugin({
