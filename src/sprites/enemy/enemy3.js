@@ -28,4 +28,12 @@ export class Enemy3 extends EnemyBase {
     update() {
         super.update();
     }
+
+    getHitAnimationKey() {
+        return ANIMS.ENEMY3.HIT;
+    }
+
+    getIdleAnimationKey() {
+        return ANIMS.ENEMY3.IDLE;
+    }
 }
