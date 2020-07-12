@@ -58,16 +58,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
-<<<<<<< HEAD
         this.scene.spells.add(new Fireball(this.scene, this.x, this.y));
       }
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
         const direction = this.flipX ? -1 : 1
         this.castFirecircle();
-=======
-        this.scene.spells.add(new Bastion(this.scene, this.x, this.y, direction));
->>>>>>> 6fa25af... Added basis for new bastion spells and got hyp for spikes
       }
   
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
