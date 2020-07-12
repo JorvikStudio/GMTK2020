@@ -15,7 +15,7 @@ module.exports = merge(base, {
     maxAssetSize: 900000
   },
   plugins: [
-    new CopyPlugin({
+    new CopyWebpackPlugin({
       patterns: [
         { from: 'src', to: 'dist' },
       ],
