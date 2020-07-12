@@ -65,8 +65,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
-<<<<<<< HEAD
-=======
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
         this.scene.spells.add(new Smite(this.scene, this.x, this.y, direction));
@@ -77,7 +75,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.castFirecircle();
       }
   
->>>>>>> 22960e0... Added smite spell
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
