@@ -207,7 +207,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     let count = 0;
     this.castSingleFireCircle();
     const interval = setInterval(() => {
-      if(count < 3) {
+      if(count < 2) {
         this.castSingleFireCircle();
         count++;
       } else {
