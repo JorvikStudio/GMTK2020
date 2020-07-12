@@ -35,8 +35,8 @@ export class Level1Scene extends Scene {
 
       const tileset = map.addTilesetImage("Assets", "tiles");
 
-      this.add.image(0, 0, 'sky');
-      this.add.image(800, 0, 'sky');
+      this.add.image(0, 300, 'sky');
+      this.add.image(800, 300, 'sky');
 
       this.backgroundLayer = map.createStaticLayer("backgroundLayer", tileset, 0, 0);
       this.backgroundLayer.scale = 2;
