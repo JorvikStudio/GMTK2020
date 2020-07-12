@@ -17,7 +17,7 @@ export class MainMenu extends Phaser.Scene {
             credits: 425,
 
         };
-        this.selectorPosition = Object.keys(this.light_positions)[0];
+        this.selectorPosition = 0;
     }
 
     preload() {
@@ -105,22 +105,23 @@ export class MainMenu extends Phaser.Scene {
         })
 
         this.light = new Light(this);
-        this.light.setPosition(100, this.light_positions[this.selectorPosition]);
+        this.light.setPosition(100, this.light_positions[this.getLightPositionKey(this.selectorPosition)]);
 
         this.light.on("light_up", () => {
-            this.selectorPosition = Object.keys(this.light_positions)[0];
-            this.light.setY(this.light_positions[this.selectorPosition]);
+            this.selectorPosition = this.selectorPosition === 0 ? 0 : this.selectorPosition - 1;
+            this.light.setY(this.light_positions[this.getLightPositionKey(this.selectorPosition)]);
         });
         this.light.on("light_down", () => {
-            this.selectorPosition = Object.keys(this.light_positions)[1];
-            this.light.setY(this.light_positions[this.selectorPosition]);
+            const maxPosition = Object.keys(this.light_positions).length - 1;
+            this.selectorPosition = this.selectorPosition === maxPosition ? maxPosition : this.selectorPosition + 1;
+            this.light.setY(this.light_positions[this.getLightPositionKey(this.selectorPosition)]);
         });
 
         this.light.on("light_select", () => {
-            const play1Selector = Object.keys(this.light_positions)[0];
-            const play2Selector = Object.keys(this.light_positions)[1];
-            const play3Selector = Object.keys(this.light_positions)[2];
-            const creditsSelector = Object.keys(this.light_positions)[3];
+            const play1Selector = 0
+            const play2Selector = 1
+            const play3Selector = 2
+            const creditsSelector = 3
 
             if (this.selectorPosition === play1Selector) {
                 this.scene.start(SCENE_NAMES.LEVEL1);
@@ -133,6 +134,12 @@ export class MainMenu extends Phaser.Scene {
             }
         });
         
+    }
+
+    getLightPositionKey(index) {
+        const keys = Object.keys(this.light_positions);
+        const selectedKey = keys[index];
+        return selectedKey;
     }
 
     renderBackground(gameWidth, gameHeight) {
