@@ -122,7 +122,7 @@ export class MainMenu extends Scene {
             const play1Selector = 0;
             const play2Selector = 1;
             const play3Selector = 2;
-            //const creditsSelector = 3
+            const creditsSelector = 3
 
             if (this.selectorPosition === play1Selector) {
                 this.scene.start(SCENE_NAMES.LEVEL1);
@@ -130,8 +130,11 @@ export class MainMenu extends Scene {
             else if (this.selectorPosition === play2Selector) {
                 this.scene.start(SCENE_NAMES.LEVEL2);
             }
-            else  if (this.selectorPosition === play3Selector) {
+            else if (this.selectorPosition === play3Selector) {
                 this.scene.start(SCENE_NAMES.LEVEL3);
+            }
+            else if (this.selectorPosition === creditsSelector) {
+                this.scene.start(SCENE_NAMES.CREDITS);
             }
         });
         

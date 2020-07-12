@@ -12,7 +12,6 @@ import { Enemy2 } from "../sprites/enemy/enemy2";
 import { Enemy4 } from "../sprites/enemy/enemy4";
 import { Enemy5 } from "../sprites/enemy/enemy5";
 import { Enemy3 } from "../sprites/enemy/enemy3";
-import { Fireball } from "../sprites/fireball/fireball";
 
 export class Level2Scene extends Scene {
 

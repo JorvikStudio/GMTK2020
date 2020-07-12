@@ -12,7 +12,6 @@ import { Enemy2 } from "../sprites/enemy/enemy2";
 import { Enemy4 } from "../sprites/enemy/enemy4";
 import { Enemy5 } from "../sprites/enemy/enemy5";
 import { Enemy3 } from "../sprites/enemy/enemy3";
-import { Fireball } from "../sprites/fireball/fireball";
 
 export class Level1Scene extends Scene {
 
@@ -34,6 +33,7 @@ export class Level1Scene extends Scene {
       const map = this.make.tilemap({key: "map"});
 
       const tileset = map.addTilesetImage("Assets", "tiles");
+      this.spellList = ['fireball', 'firecircle'];
 
       this.add.image(0, 300, 'sky');
       this.add.image(800, 300, 'sky');

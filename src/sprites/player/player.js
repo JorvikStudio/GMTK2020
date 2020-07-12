@@ -29,7 +29,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.body.offset = ({x: -1, y: 0});
 
     this.on("animationcomplete", this.animComplete, this);
-    this.blockedInput = false
+    this.blockedInput = false;
+
+    this.spellList = this.scene.spellList;
+    this.currentSpell = '';
+
+    this.chooseSpell();
+    setInterval(() => { 
+        this.chooseSpell();    
+    }, 5000);
   }
 
   update() {
@@ -49,11 +57,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
-      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
-        const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
-      }
-  
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
@@ -151,4 +154,33 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
   }
 
+  chooseSpell() {
+
+    let spells = this.spellList.filter(spellName => spellName != this.currentSpell);
+    this.currentSpell = spells[Math.floor(Math.random() * spells.length)];
+    let count = 0;
+
+    this.castSpell(this.currentSpell);
+
+    const interval = setInterval(() => {
+      if (count < 4) {
+        this.castSpell(this.currentSpell);
+        count++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  castSpell(spellName) {
+    
+    if (spellName == 'fireball'){
+       const direction = this.flipX ? -1 : 1
+       this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+    }
+    else {
+      console.log(spellName);
+    }
+    
+  }
 }
