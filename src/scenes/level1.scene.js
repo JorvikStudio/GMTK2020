@@ -13,6 +13,7 @@ import { Enemy2 } from "../sprites/enemy/enemy2";
 import { Enemy4 } from "../sprites/enemy/enemy4";
 import { Enemy5 } from "../sprites/enemy/enemy5";
 import { Enemy3 } from "../sprites/enemy/enemy3";
+import { Fireball } from "../sprites/fireball/fireball";
 
 export class Level1Scene extends Phaser.Scene {
 
@@ -56,6 +57,7 @@ export class Level1Scene extends Phaser.Scene {
 
       this.enemies = this.add.group();
       this.spells = this.add.group();
+      
       this.player = new Player(this);
       this.enemies.add(new Enemy1(this));
       this.enemies.add(new Enemy2(this));
@@ -70,6 +72,13 @@ export class Level1Scene extends Phaser.Scene {
 
       this.physics.add.collider(this.player, this.mainLayer);
       this.physics.add.collider(this.enemies, this.mainLayer);
+      this.physics.add.collider(this.spells, this.mainLayer, (spell, wall) => {
+        if(spell.onImpact) {
+          spell.onImpact();
+        }
+      });
+
+      this.physics.add.collider(this.enemies, this.spells);
     }
 
     update() {
@@ -77,6 +86,10 @@ export class Level1Scene extends Phaser.Scene {
 
       this.physics.overlap(this.player, this.enemies, () => {
         this.player.damage();
+      });
+
+      this.physics.overlap(this.spells, this.enemies, () => {
+        console.log("Enemy hit");
       });
 
       for(const enemy of this.enemies.getChildren()) {
