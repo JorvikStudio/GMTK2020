@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, posX, posY, texture, width, height) {
+    constructor(scene, posX, posY, texture, width, height, patrolBoundariesLeft, patrolBoundariesRight) {
         super(scene, posX, posY, texture);
         this.startBaseAnimation();
         this.scheduleAnimations();
@@ -13,6 +13,13 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
         this.hasHitFloor = false;
         this.checkFloors = false;
         this.health = this.getStartingHealth();
+
+        if (patrolBoundariesLeft > 0 && patrolBoundariesRight > 0) {
+            this.patrolBoundaries = {
+                left: patrolBoundariesLeft,
+                right: patrolBoundariesRight
+            };
+        }
     }
 
     getStartingHealth() {

@@ -50,7 +50,6 @@ export class PreloadScene extends Phaser.Scene {
     this.music.play(musicConfig);  
 
     this.scene.start(SCENE_NAMES.MAIN_MENU);
-    //this.scene.start(SCENE_NAMES.LEVEL1);
   }
 
   createPlayerAnimations() {
@@ -58,7 +57,7 @@ export class PreloadScene extends Phaser.Scene {
       key: ANIMS.PLAYER.IDLE,
       frames: this.anims.generateFrameNames("player_atlas", {
         start: 1,
-        end: 10,
+        end: 9,
         zeroPad: 2,
         prefix: "idle",
         suffix: ".png"
