@@ -9,6 +9,7 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         this.body.setSize(width, height);
         this.scale = 1.5
+        this.setImmovable(true);
     }
 
     startBaseAnimation() {

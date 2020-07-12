@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
+import { Firecircle } from "../firecircle/firecircle";
 // import { Firecircle } from "../firecircle/firecircle"
 // import { SCENE_NAMES } from "../../_cst";
 
@@ -52,6 +53,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
         this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+      }
+
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
+        const direction = this.flipX ? -1 : 1
+        this.scene.spells.add(new Firecircle(this.scene, this.x, this.y, direction));
       }
   
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
@@ -149,6 +155,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   getFacingDirection() {
     return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
+  }
+
+  castFirecircle() {
+    
   }
 
 }

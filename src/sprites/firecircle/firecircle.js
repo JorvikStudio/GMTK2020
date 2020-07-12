@@ -22,6 +22,12 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.createShellEntryPath(this.shell.getStartPoint());
 
         this.curve = this.shell;
+
+        this.scene.physics.world.enable(this);
+
+        this.body.setImmovable(true);
+        this.body.allowGravity = false;
+        this.body.isCircle = true;
     }
   
     createShellFlightPath()
@@ -91,10 +97,19 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     {
         for (var i = 0; i<3; i++)
         {
-            this.percent = (this.pi+i)/numberOfPoints;
-            var x = curve.getPoint(this.percent).x;
-            var y = curve.getPoint(this.percent).y;
-            this.drawfireball(x, y, (i+1)*3);
+            const size = (i+1)*3;
+            const offset = size * 1.5;
+
+            const percent = (this.pi+i)/numberOfPoints;
+            const point = curve.getPoint(percent);
+            var x = point.x;
+            var y = point.y;
+            
+            this.drawfireball(x, y, size);
+
+            this.body.position = new Phaser.Math.Vector2(point.x - offset, point.y - offset);
+            this.body.updateCenter();
+            this.body.setVelocityX(1);
         }
     }
 
