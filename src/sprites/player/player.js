@@ -3,6 +3,7 @@ import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
 import { Firecircle } from "../firecircle/firecircle";
 import { Bastion } from "../bastion/bastion"
+import { Smite } from "../smite/smite"
 // import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
@@ -64,6 +65,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
+        const direction = this.flipX ? -1 : 1
+        this.scene.spells.add(new Smite(this.scene, this.x, this.y, direction));
+      }
+
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
+        const direction = this.flipX ? -1 : 1
+        this.castFirecircle();
+      }
+  
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
