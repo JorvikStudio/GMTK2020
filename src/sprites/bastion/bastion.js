@@ -22,8 +22,8 @@ export class Bastion extends Phaser.Physics.Arcade.Sprite {
   createBastion ()
   {
     const bastionBase = this.y + 26;
-    const bastionStart = this.x + 24
-    const bastionLength = 60;
+    const bastionStart = this.x + 24 * this.direction;
+    const bastionLength = 60 * this.direction;
     const bastionHeight = 40;
 
     var point1 = new Phaser.Geom.Point(bastionStart, bastionBase-bastionHeight);
@@ -50,13 +50,13 @@ export class Bastion extends Phaser.Physics.Arcade.Sprite {
     // normal.strokeLineShape(normalLine);   
     
     if (iteration > 5) {
-      var flip = -1;
+      var flip = -1 * this.direction;
     }
     else {
-      var flip = 1 
+      var flip = 1  * this.direction;
     }
     var spikeBaseStart = 0.05 * iteration*2;
-    var spikeBaseLenth = 0.10;
+    var spikeBaseLenth = 0.10 * this.direction;
     var spikeBase1 = hypotenuse.getPoint(spikeBaseStart);
     var spikeBase2 = hypotenuse.getPoint(spikeBaseStart + spikeBaseLenth);
 
