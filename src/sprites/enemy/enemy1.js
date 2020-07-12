@@ -2,9 +2,7 @@ import { ANIMS } from "./_cst"
 import { EnemyBase } from "./enemy.base";
 
 export class Enemy1 extends EnemyBase {
-    constructor(scene) {
-        const x = 1100;
-        const y = 50;
+    constructor(scene, x, y) {
         super(scene, x, y, "enemy1", 32, 32);
     }
 

@@ -5,9 +5,7 @@ import { Fireball } from "../fireball/fireball";
 // import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene) {
-    var x = 100; //config.width / 2;
-    var y = 100;
+  constructor(scene, x, y) {
 
     super(scene, x, y, "player");
     scene.physics.world.enable(this);
