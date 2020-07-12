@@ -5,6 +5,8 @@ import { Firecircle } from "../firecircle/firecircle";
 import { Bastion } from "../bastion/bastion"
 // import { SCENE_NAMES } from "../../_cst";
 
+const PLAYER_HEALTH = 100;
+
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
 
@@ -24,7 +26,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.state = PLAYER_STATE.IDLE;
     this.body.setSize(24, 38);
     this.scale = 1.5
-    console.log(this);
+    this.health = PLAYER_HEALTH;
     //this.body.updateCenter();
     
     this.body.offset = ({x: -1, y: 0});
@@ -135,15 +137,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-this.playerJumpHeight);
   }
 
-  damage() {
+  damage(damageTaken) {
     if(!this.invincible) {
-      console.log("damage");
+      this.health = this.health - damageTaken;
+      if (this.health < 0) {
+        console.log("OH DEAR, OH DEAR");
+      }
+      console.log(`PLAYER: Health is ${this.health}, Damage taken was ${damageTaken}.`);
       this.anims.play(ANIMS.PLAYER.DAMAGED);
       this.blockedInput = true;
       this.setVelocityX(300 * this.getFacingDirection() * -1);
       this.setVelocityY(-200);
       this.invincible = true;
-
+      
       setTimeout(() => { 
         console.log("timer");
         this.invincible = false;
