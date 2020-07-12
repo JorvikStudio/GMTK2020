@@ -64,11 +64,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if(!this.blockedInput) {
-
-      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
-        const direction = this.flipX ? -1 : 1
-        this.castFirecircle();
-      }
   
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
