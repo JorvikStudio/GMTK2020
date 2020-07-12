@@ -12,10 +12,6 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
         this.setImmovable(true);
         this.hasHitFloor = false;
         this.checkFloors = false;
-        this.patrolBoundaries = {
-            left: 496,
-            right: 704
-        };
     }
 
     startBaseAnimation() {
@@ -27,6 +23,7 @@ export class EnemyBase extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        this.setSizeToFrame();
         if (this.enemyPatrols()) {
             this.patrolPoints();
         }
