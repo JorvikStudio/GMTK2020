@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
+import { Firecircle } from "../firecircle/firecircle";
 // import { Firecircle } from "../firecircle/firecircle"
 // import { SCENE_NAMES } from "../../_cst";
 
@@ -35,6 +36,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     this.body.updateCenter();
     let playerSpeed = 250;
+
+    if(this.invincible) {
+      this.alpha = 0.5;
+    } else {
+      this.alpha = 1;
+    }
     if(this.body.onFloor()) {
       this.setVelocityX(0);
       this.blockedInput = false;
@@ -51,7 +58,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
+        this.scene.spells.add(new Fireball(this.scene, this.x, this.y));
+      }
+
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
+        const direction = this.flipX ? -1 : 1
+        this.castFirecircle();
       }
   
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
@@ -149,6 +161,27 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   getFacingDirection() {
     return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
+  }
+
+  castFirecircle() {
+    let count = 0;
+    this.castSingleFireCircle();
+    const interval = setInterval(() => {
+      if(count < 2) {
+        this.castSingleFireCircle();
+        count++;
+      }
+    }, 500);
+  }
+
+  castSingleFireCircle() {
+    const fc = new Firecircle(this.scene, this.x, this.y)
+    this.scene.spells.add(fc);
+
+    setTimeout(() => {
+      fc.active = false;
+      fc.destroySelf();
+    }, 3000);
   }
 
 }

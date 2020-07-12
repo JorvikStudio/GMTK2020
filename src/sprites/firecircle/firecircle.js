@@ -1,10 +1,9 @@
 import Phaser from "phaser";
 export class Firecircle extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(scene, x, y, direction) {
+    constructor(scene, x, y) {
         super(scene, x, y, "firecircle");
     
-        this.direction = direction;
         var ball = scene.add.graphics();
 
         this.ball = ball;
@@ -18,18 +17,24 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
         this.body.isCircle = true;
 
-        this.createShellFlightPath();
+        this.createShellFlightPath(this.x, this.y);
         this.createShellEntryPath(this.shell.getStartPoint());
 
         this.curve = this.shell;
+
+        this.scene.physics.world.enable(this);
+
+        this.body.setImmovable(true);
+        this.body.allowGravity = false;
+        this.body.isCircle = true;
     }
   
-    createShellFlightPath()
+    createShellFlightPath(x, y)
     {
         var height = 100;
         var width = 50;
 
-        this.shell = new Phaser.Curves.Ellipse(this.x, this.y, width, height);
+        this.shell = new Phaser.Curves.Ellipse(x, y, width, height);
         
         // this.drawCurve(this.shell);
     }
@@ -63,6 +68,9 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     
     update ()
     {
+
+        this.curve = this.createShellFlightPath(this.scene.player.x, this.scene.player.y)
+        
         this.ball.clear();
         const destroySelf = false;
         
@@ -91,10 +99,19 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     {
         for (var i = 0; i<3; i++)
         {
-            this.percent = (this.pi+i)/numberOfPoints;
-            var x = curve.getPoint(this.percent).x;
-            var y = curve.getPoint(this.percent).y;
-            this.drawfireball(x, y, (i+1)*3);
+            const size = (i+1)*3;
+            const offset = size * 1.5;
+
+            const percent = (this.pi+i)/numberOfPoints;
+            const point = curve.getPoint(percent);
+            var x = point.x;
+            var y = point.y;
+            
+            this.drawfireball(x, y, size);
+
+            this.body.position = new Phaser.Math.Vector2(point.x - offset, point.y - offset);
+            this.body.updateCenter();
+            this.body.setVelocityX(1);
         }
     }
 
@@ -103,4 +120,9 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
         this.ball.fillStyle(0xf0652e, 1);
         this.ball.fillCircle(x, y, size);
     }
+
+    destroySelf() {
+        this.ball.clear();
+        this.destroy();
+      }
   }

@@ -3,11 +3,7 @@ import { EnemyBase } from "./enemy.base";
 
 export class Enemy5 extends EnemyBase {
     constructor(scene, x, y) {
-        super(scene, x, y, "enemy5", 64, 64);
-        this.patrolBoundaries = {
-            left: 1050,
-            right: 1600
-        };
+        super(scene, x, y, "enemy5", 64, 64);    
     }
 
     startBaseAnimation() {
@@ -31,10 +27,6 @@ export class Enemy5 extends EnemyBase {
     }
 
     update() {
-        super.update();
-    }
-
-    getEnemySpeed() {
-        return 15;
+        this.setSizeToFrame();
     }
 }
