@@ -170,6 +170,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       if(count < 2) {
         this.castSingleFireCircle();
         count++;
+      } else {
+        clearInterval(interval);
       }
     }, 500);
   }
