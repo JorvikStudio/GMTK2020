@@ -1,4 +1,3 @@
-import { config } from "../../index";
 import { ANIMS } from "./_cst"
 import { EnemyBase } from "./enemy.base";
 

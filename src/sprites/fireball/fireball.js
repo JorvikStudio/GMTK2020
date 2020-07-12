@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 export class Fireball extends Phaser.Physics.Arcade.Sprite {
 
   constructor(scene, x, y, direction) {

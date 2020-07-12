@@ -1,3 +1,4 @@
+import { Scene } from "phaser";
 import { SCENE_NAMES } from "../_cst";
 
 import walls from "../assets/castle/walls_far.png"
@@ -6,7 +7,7 @@ import logo from "../assets/logo.png";
 import { Light } from "../sprites/light/light"
 import { ANIMS } from "../sprites/light/_cst";
 
-export class MainMenu extends Phaser.Scene {
+export class MainMenu extends Scene {
 
     constructor() {
         super(SCENE_NAMES.MAIN_MENU);
@@ -14,7 +15,7 @@ export class MainMenu extends Phaser.Scene {
             play: 200,
             play2: 275,
             play3: 350,
-            credits: 425,
+            credits: 425
 
         };
         this.selectorPosition = 0;
@@ -55,7 +56,7 @@ export class MainMenu extends Phaser.Scene {
           loop: -1
         });
 
-        const gameName = this.add.text(175, 100, "SUPER WIZARD", {
+        this.add.text(175, 100, "SUPER WIZARD", {
             fill: "#fff6a8",
             fontFamily: "Consolas",
             fontSize: 64
@@ -118,10 +119,10 @@ export class MainMenu extends Phaser.Scene {
         });
 
         this.light.on("light_select", () => {
-            const play1Selector = 0
-            const play2Selector = 1
-            const play3Selector = 2
-            const creditsSelector = 3
+            const play1Selector = 0;
+            const play2Selector = 1;
+            const play3Selector = 2;
+            //const creditsSelector = 3
 
             if (this.selectorPosition === play1Selector) {
                 this.scene.start(SCENE_NAMES.LEVEL1);
@@ -144,8 +145,6 @@ export class MainMenu extends Phaser.Scene {
 
     renderBackground(gameWidth, gameHeight) {
      
-        const backgroundWidth = 480;
-        const backgroundHeight = 240;
         const imageWidth = 128;
         const imageHeight = 256;
 

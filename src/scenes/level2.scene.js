@@ -1,20 +1,19 @@
+import { Scene } from "phaser";
 import { SCENE_NAMES } from "../_cst";
 
-import { ANIMS } from "../sprites/player/_cst";
 import { Player } from "../sprites/player/player";
 
-import player_dino from "../assets/spritesheets/dino.png"
 import tiles from "../assets/tilesets/gino/Assets.png";
 import background from "../assets/tilesets/gino/Background.png";
 import gino_level_2 from "../assets/tilesets/gino/gino_level_2.json";
 
-import { Enemy1 } from "../sprites/enemy/enemy1";
-import { Enemy2 } from "../sprites/enemy/enemy2";
-import { Enemy4 } from "../sprites/enemy/enemy4";
-import { Enemy5 } from "../sprites/enemy/enemy5";
-import { Enemy3 } from "../sprites/enemy/enemy3";
+// import { Enemy1 } from "../sprites/enemy/enemy1";
+// import { Enemy2 } from "../sprites/enemy/enemy2";
+// import { Enemy4 } from "../sprites/enemy/enemy4";
+// import { Enemy5 } from "../sprites/enemy/enemy5";
+// import { Enemy3 } from "../sprites/enemy/enemy3";
 
-export class Level2Scene extends Phaser.Scene {
+export class Level2Scene extends Scene {
 
     constructor () {
         super(SCENE_NAMES.LEVEL2);
@@ -44,7 +43,7 @@ export class Level2Scene extends Phaser.Scene {
       this.mainLayer.setCollisionByProperty({collides: true});
       this.mainLayer.scale = 2;
 
-      const debugGraphics = this.add.graphics().setAlpha(0.75);
+      this.add.graphics().setAlpha(0.75); //debugGraphics
       
       /*
       mainLayer.renderDebug(debugGraphics, {
@@ -65,7 +64,7 @@ export class Level2Scene extends Phaser.Scene {
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);
       // make the camera follow the player
-      this.cameras.main.startFollow(this.player);
+      this.cameras.main.startFollow(this.player, true);
 
       this.physics.add.collider(this.player, this.mainLayer);
       this.physics.add.collider(this.enemies, this.mainLayer);      

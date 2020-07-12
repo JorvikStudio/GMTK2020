@@ -1,8 +1,8 @@
-import {config, game} from "../../index";
+import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
-import { Firecircle } from "../firecircle/firecircle"
-import { SCENE_NAMES } from "../../_cst";
+// import { Firecircle } from "../firecircle/firecircle"
+// import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene) {
@@ -106,6 +106,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
           break;
         case PLAYER_STATE.CASTING:
           this.anims.play(ANIMS.PLAYER.CAST, true)
+          break;
         default:
           console.log("STATE NOT ANIMATED")
       }
@@ -134,16 +135,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(-200);
       this.invincible = true;
 
-      const timeout = setTimeout(() => { 
+      setTimeout(() => { 
         console.log("timer");
         this.invincible = false;
       }, 3000);
     }
   }
 
-  animComplete(animation, frame) {
+  animComplete(animation) {
     const key = animation.key;
-    const direction = this.flipX;
+    // const direction = this.flipX;
     if(key === ANIMS.PLAYER.DAMAGED) {
       this.blockedInput = false;
     }

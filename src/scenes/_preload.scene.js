@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { SCENE_NAMES } from "../_cst";
 import playerAtlas from "../assets/spritesheets/gino.json";
 import enemy1Atlas from "../assets/spritesheets/enemy1.json";
@@ -7,6 +8,7 @@ import enemy4Atlas from "../assets/spritesheets/enemy4.json";
 import enemy5Atlas from "../assets/spritesheets/enemy5.json";
 import { ANIMS } from "../sprites/player/_cst";
 import { ANIMS as ENEMY_ANIMS } from "../sprites/enemy/_cst"
+import music from "../assets/unwritten-return.mp3";
 
 export class PreloadScene extends Phaser.Scene {
   // Preload images and animations here
@@ -22,7 +24,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.multiatlas("enemy3_atlas", enemy3Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy4_atlas", enemy4Atlas, "src/assets/spritesheets");
     this.load.multiatlas("enemy5_atlas", enemy5Atlas, "src/assets/spritesheets");
-    this.load.audio("music", [require("../assets/unwritten-return.mp3")]);
+    this.load.audio("music", [music]);
   }
 
   create() {
