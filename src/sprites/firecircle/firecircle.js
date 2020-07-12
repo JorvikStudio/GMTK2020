@@ -63,6 +63,7 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     update ()
     {
         this.ball.clear();
+        const destroySelf = false;
         
         if (!this.isEntryComplete)
         {
@@ -78,6 +79,10 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
             this.drawFireballs(this.shell, 80);
         }
         
+        if(destroySelf) {
+            this.destroy();
+        }
+
         this.pi++;
     }
 
