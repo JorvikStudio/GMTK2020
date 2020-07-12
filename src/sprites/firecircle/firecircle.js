@@ -13,6 +13,11 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
 
         this.isEntryComplete = false;
 
+        this.scene.physics.world.enable(this);
+        this.body.setImmovable(true);
+        this.body.allowGravity = false;
+        this.body.isCircle = true;
+
         this.createShellFlightPath();
         this.createShellEntryPath(this.shell.getStartPoint());
 
@@ -49,7 +54,6 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     
         this.graphics.fillStyle(0x00ff00, 1);
         this.graphics.lineStyle(1, 0x00ff00, 1);
-
     }
 
     create ()
@@ -60,6 +64,7 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
     update ()
     {
         this.ball.clear();
+        const destroySelf = false;
         
         if (!this.isEntryComplete)
         {
@@ -75,6 +80,10 @@ export class Firecircle extends Phaser.Physics.Arcade.Sprite {
             this.drawFireballs(this.shell, 80);
         }
         
+        if(destroySelf) {
+            this.destroy();
+        }
+
         this.pi++;
     }
 
