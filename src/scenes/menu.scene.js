@@ -102,7 +102,7 @@ export class MainMenu extends Scene {
         });
         creditsButton.setInteractive();
         creditsButton.on("pointerdown", () => {
-            this.scene.start(SCENE_NAMES.SCENE_A);
+            this.scene.start(SCENE_NAMES.CREDITS);
         })
 
         this.light = new Light(this);

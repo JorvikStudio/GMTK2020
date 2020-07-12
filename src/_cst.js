@@ -3,5 +3,6 @@ export const SCENE_NAMES = {
   MAIN_MENU: "MainMenu",
   LEVEL1: "Level1",
   LEVEL2: "Level2",
-  LEVEL3: "Level3"
+  LEVEL3: "Level3",
+  CREDITS: "Credits"
 }
