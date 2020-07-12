@@ -20,16 +20,12 @@ export class Fireball extends Phaser.Physics.Arcade.Sprite {
 
   createFlightpath ()
   {
-    this.size = 32;
-
     this.curve = new Phaser.Curves.Spline();
 
     for (var i = 0; i<8; i++)
     {
       this.curve.addPoint((this.x + (60 * i * this.direction)), (this.y + 30*(Math.sin(i * 90))))
-    }        
-            
-      this.points = this.curve.getDistancePoints(this.size);
+    }
   }
     
   // this will draw the flight path, more for debugging than anything else

@@ -58,7 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
         const direction = this.flipX ? -1 : 1
-        this.scene.spells.add(new Fireball(this.scene, this.x, this.y));
+        this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
       }
 
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
