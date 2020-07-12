@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
 import { Firecircle } from "../firecircle/firecircle";
-// import { Firecircle } from "../firecircle/firecircle"
+import { Bastion } from "../bastion/bastion"
 // import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
