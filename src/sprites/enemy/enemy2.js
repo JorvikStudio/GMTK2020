@@ -26,6 +26,7 @@ export class Enemy2 extends EnemyBase {
     }
 
     update() {
+        super.update();
         this.setSizeToFrame();
     }
 }
