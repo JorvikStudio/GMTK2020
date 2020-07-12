@@ -33,32 +33,37 @@ export class Bastion extends Phaser.Physics.Arcade.Sprite {
     var point2 = new Phaser.Geom.Point(bastionStart, bastionBase);
     var point3 = new Phaser.Geom.Point(this.x+bastionLength, bastionBase);
 
-    // this.bastionWall.fillTriangle(point1.x, point1.y, point2.x, point2.y, point3.x, point3.y);
+    // this.bastionWall.fillTriangle(point1.x, point1.y, point2.x, point2.y, point3.x, point3.y); // turn back on to get inital wall in
     this.bastionWallGeom = new Phaser.Geom.Triangle(point1.x, point1.y, point2.x, point2.y, point3.x, point3.y);
     this.bastionWall.fillStyle(0x464a4f, 1)
   }
 
   createBastionSpike (scene)
   {
-    
+    // below is for debuging
     var hypotenuse = this.bastionWallGeom.getLineC();
-    // this.graphics.strokeLineShape(hypotenuse)
-
     var line = scene.add.graphics();
     line.strokeLineShape(hypotenuse);
-    // line.lineStyle(20, 0x00FF00)
-    // line.lineBetween(hypotenuse.getPointA, hypotenuse.getPointB);
-    // line.fillStyle(0x464a4f, 1)
+
+    var spikeBaseStart = 0.10;
+    var spikeBaseLenth = 0.10;
+  
+    // var normalTohypotenuse = Phaser.Geom.Line.GetNormal(hypotenuse);
+    // var middlePoint = Phaser.Geom.Line.GetMidPoint(hypotenuse);
+
+    // var normalLine = new Phaser.Geom.Line (normalTohypotenuse.x, normalTohypotenuse.y, middlePoint.x, middlePoint.y);
+
+    var rad = Phaser.Math.DegToRad(90);
+    var normalLine = Phaser.Geom.Line.Rotate(hypotenuse, rad);
 
 
-    const spikeBase = this.y + 26;
-    const spikeStart = this.x + 24
-    const spikeLength = 70;
-    const spikeHeight = 50;
+    var normal = scene.add.graphics();
+    normal.strokeLineShape(normalLine);
 
-    var point1 = new Phaser.Geom.Point(spikeStart, spikeBase-spikeHeight);
-    var point2 = new Phaser.Geom.Point(spikeStart, spikeBase);
-    var point3 = new Phaser.Geom.Point(this.x+spikeLength, spikeBase);
+
+    var point1 = hypotenuse.getPoint(spikeBaseStart);
+    var point2 = hypotenuse.getPoint(spikeBaseStart + spikeBaseLenth);
+    // var point3 = new Phaser.Geom.Point(this.x+spikeLength, spikeBase);
 
   }
 
