@@ -4,6 +4,7 @@ import { Fireball } from "../fireball/fireball";
 import { Firecircle } from "../firecircle/firecircle";
 import { Bastion } from "../bastion/bastion"
 import { Smite } from "../smite/smite"
+import { SCENE_NAMES } from "../../_cst";
 // import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
@@ -43,6 +44,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
+
+    if(Phaser.Input.Keyboard.JustDown(this.keyboard.ESC)) {
+      this.scene.scene.stop();
+    }
+
     this.body.updateCenter();
     let playerSpeed = 250;
 
