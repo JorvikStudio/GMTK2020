@@ -33,7 +33,7 @@ export class Level3Scene extends Scene {
       const map = this.make.tilemap({key: "map"});
 
       const tileset = map.addTilesetImage("Assets", "tiles");
-      this.spellList = ['fireball', 'firecircle'];
+      this.spellList = ['bastion', 'firecircle'];
 
       this.add.image(0, 300, 'sky');
       this.add.image(800, 300, 'sky');
@@ -48,7 +48,7 @@ export class Level3Scene extends Scene {
 
       this.enemies = this.add.group();
       this.spells = this.add.group();
-      
+
       this.player = new Player(this, 100, 465);
       this.enemies.add(new Enemy1(this, 400, 465));
       this.enemies.add(new Enemy2(this, 700, 525));
