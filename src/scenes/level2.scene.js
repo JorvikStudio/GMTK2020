@@ -33,6 +33,7 @@ export class Level2Scene extends Scene {
       const map = this.make.tilemap({key: "map"});
 
       const tileset = map.addTilesetImage("Assets", "tiles");
+      this.spellList = ['fireball', 'firecircle'];
 
       this.add.image(0, 300, 'sky');
       this.add.image(800, 300, 'sky');
@@ -45,20 +46,14 @@ export class Level2Scene extends Scene {
 
       this.add.graphics().setAlpha(0.75); //debugGraphics
       
-      /*
-      mainLayer.renderDebug(debugGraphics, {
-        tileColor: null, // Color of non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-      });
-      */
-
       this.enemies = this.add.group();
+      this.spells = this.add.group();
+
       this.player = new Player(this, 100, 400);
       this.enemies.add(new Enemy3(this, 500, 410));
       this.enemies.add(new Enemy4(this, 850, 210));
       this.enemies.add(new Enemy1(this, 1100, 400));
-      this.enemies.add(new Enemy5(this, 1100, 400));
+      this.enemies.add(new Enemy5(this, 1300, 400));
 
       // set bounds so the camera won't go outside the game world
       this.cameras.main.setBounds(0, 0, 1600, 610);
@@ -66,7 +61,14 @@ export class Level2Scene extends Scene {
       this.cameras.main.startFollow(this.player, true);
 
       this.physics.add.collider(this.player, this.mainLayer);
-      this.physics.add.collider(this.enemies, this.mainLayer);      
+      this.physics.add.collider(this.enemies, this.mainLayer);   
+      this.physics.add.collider(this.spells, this.mainLayer, (spell, wall) => {
+        if(spell.onImpact) {
+          spell.onImpact();
+        }
+      });
+
+      this.physics.add.collider(this.enemies, this.spells);   
     }
 
     update() {

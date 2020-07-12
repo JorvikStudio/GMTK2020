@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
 // import { Firecircle } from "../firecircle/firecircle"
-// import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -181,6 +180,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     else {
       console.log(spellName);
     }
-    
+
   }
 }
