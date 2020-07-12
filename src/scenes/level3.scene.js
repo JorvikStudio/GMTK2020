@@ -79,5 +79,20 @@ export class Level3Scene extends Scene {
       this.physics.overlap(this.player, this.enemies, () => {
         this.player.damage();
       });
+
+      this.physics.collide(this.spells, this.enemies, (spell, enemy) => {
+        enemy.takeDamage(30);
+        if(spell.destroySelf) {
+          spell.destroySelf();
+        }
+      });
+
+      for(const enemy of this.enemies.getChildren()) {
+        enemy.update();
+      }
+
+      for(const spell of this.spells.getChildren()) {
+        spell.update();
+      }
     }
 }
