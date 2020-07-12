@@ -1,7 +1,9 @@
 import Phaser from "phaser";
 import { ANIMS, PLAYER_STATE, DIRECTION } from "./_cst";
 import { Fireball } from "../fireball/fireball";
-// import { Firecircle } from "../firecircle/firecircle"
+import { Firecircle } from "../firecircle/firecircle";
+import { Bastion } from "../bastion/bastion"
+// import { SCENE_NAMES } from "../../_cst";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -28,20 +30,18 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.body.offset = ({x: -1, y: 0});
 
     this.on("animationcomplete", this.animComplete, this);
-    this.blockedInput = false;
-
-    this.spellList = this.scene.spellList;
-    this.currentSpell = '';
-
-    this.chooseSpell();
-    setInterval(() => { 
-        this.chooseSpell();    
-    }, 5000);
+    this.blockedInput = false
   }
 
   update() {
     this.body.updateCenter();
     let playerSpeed = 250;
+
+    if(this.invincible) {
+      this.alpha = 0.5;
+    } else {
+      this.alpha = 1;
+    }
     if(this.body.onFloor()) {
       this.setVelocityX(0);
       this.blockedInput = false;
@@ -56,6 +56,16 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     if(!this.blockedInput) {
 
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.Z)) {
+        const direction = this.flipX ? -1 : 1
+        this.scene.spells.add(new Fireball(this.scene, this.x, this.y));
+      }
+
+      if(Phaser.Input.Keyboard.JustDown(this.keyboard.X)) {
+        const direction = this.flipX ? -1 : 1
+        this.castFirecircle();
+      }
+  
       if(Phaser.Input.Keyboard.JustDown(this.keyboard.SPACE)) {
         if(!this.isJumping) {
           this.isJumping = true;
@@ -153,33 +163,27 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     return this.flipX ? DIRECTION.LEFT : DIRECTION.RIGHT;
   }
 
-  chooseSpell() {
-
-    let spells = this.spellList.filter(spellName => spellName != this.currentSpell);
-    this.currentSpell = spells[Math.floor(Math.random() * spells.length)];
+  castFirecircle() {
     let count = 0;
-
-    this.castSpell(this.currentSpell);
-
+    this.castSingleFireCircle();
     const interval = setInterval(() => {
-      if (count < 4) {
-        this.castSpell(this.currentSpell);
+      if(count < 2) {
+        this.castSingleFireCircle();
         count++;
       } else {
         clearInterval(interval);
       }
-    }, 1000);
+    }, 500);
   }
 
-  castSpell(spellName) {
-    
-    if (spellName == 'fireball'){
-       const direction = this.flipX ? -1 : 1
-       this.scene.spells.add(new Fireball(this.scene, this.x, this.y, direction));
-    }
-    else {
-      console.log(spellName);
-    }
+  castSingleFireCircle() {
+    const fc = new Firecircle(this.scene, this.x, this.y)
+    this.scene.spells.add(fc);
 
+    setTimeout(() => {
+      fc.active = false;
+      fc.destroySelf();
+    }, 3000);
   }
+
 }

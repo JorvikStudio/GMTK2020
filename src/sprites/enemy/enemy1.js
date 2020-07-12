@@ -27,6 +27,14 @@ export class Enemy1 extends EnemyBase {
     }
 
     update() {
-        this.setSizeToFrame();
+        super.update();
+    }
+
+    getHitAnimationKey() {
+        return ANIMS.ENEMY1.HIT;
+    }
+
+    getIdleAnimationKey() {
+        return ANIMS.ENEMY1.IDLE;
     }
 }

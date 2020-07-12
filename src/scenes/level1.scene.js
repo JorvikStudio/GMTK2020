@@ -79,8 +79,8 @@ export class Level1Scene extends Scene {
         this.player.damage();
       });
 
-      this.physics.overlap(this.spells, this.enemies, () => {
-        console.log("Enemy hit");
+      this.physics.overlap(this.spells, this.enemies, (spell, enemy) => {
+        enemy.takeDamage(0.5);
       });
 
       for(const enemy of this.enemies.getChildren()) {
