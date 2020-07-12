@@ -1,4 +1,4 @@
-# Super Wizard by Jorvik Studio
+# Super Wizard by
 ![GitHub Logo](/src/assets/logo.png)
 ## Repo for the GMTK Game Jam Game
 
